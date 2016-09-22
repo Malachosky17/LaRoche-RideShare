@@ -1,10 +1,10 @@
 package com.products.laroche.larocherideshare;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,26 +13,29 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.products.laroche.larocherideshare.model.Constants;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private static String CURRENT_TAG = Constants.TAG_HOME;
+    private DrawerLayout drawer;
+    private Toolbar toolbar;
+    private Handler mHandler;
+
+    public static int navItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mHandler = new Handler();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -40,6 +43,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(savedInstanceState == null) {
+            navItemIndex = 0;
+            CURRENT_TAG = Constants.TAG_HOME;
+            loadHomeFragment();
+        }
     }
 
     @Override
@@ -78,24 +87,82 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        switch (item.getItemId()) {
+            //Replace the itemIndex and tags
+            case R.id.nav_home:
+                navItemIndex = 0;
+                break;
+            case R.id.nav_school:
+                navItemIndex = 1;
+                break;
+            case R.id.nav_lunch:
+                navItemIndex = 2;
+                break;
+            case R.id.nav_settings:
+                navItemIndex = 3;
+                break;
+            case R.id.nav_share:
+                //Start an app/activity that can send the apk to someone.
+                drawer.closeDrawers();
+                return true;
+            case R.id.nav_send:
+                //Start the default email host on the device.
+                drawer.closeDrawers();
+                return true;
+            default:
+                navItemIndex = 0;
         }
+
+        if(item.isChecked()) {
+            item.setChecked(false);
+        } else {
+            item.setChecked(true);
+        }
+        item.setChecked(true);
+
+        loadHomeFragment();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private Fragment getHomeFragment() {
+        switch(navItemIndex) {
+            case 0:
+                HomeDescription homeFragment = new HomeDescription();
+                return homeFragment;
+            case 1:
+                SchoolScheduler schoolFragment = new SchoolScheduler();
+                return schoolFragment;
+            default:
+                return new HomeDescription();
+        }
+    }
+
+    private void loadHomeFragment() {
+        if(getSupportFragmentManager().findFragmentByTag(Constants.TAG_HOME) != null) {
+            drawer.closeDrawers();
+            return;
+        }
+
+        Runnable mPendingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // update the main content by replacing fragments
+                Fragment fragment = getHomeFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.content_main, fragment, CURRENT_TAG);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        };
+
+        if(mPendingRunnable != null) {
+            mHandler.post(mPendingRunnable);
+        }
+
+        drawer.closeDrawers();
     }
 }
