@@ -12,17 +12,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.products.laroche.larocherideshare.model.Constants;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
 
     private static String CURRENT_TAG = Constants.TAG_HOME;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private Handler mHandler;
+    private NavigationView navigationView;
+    private boolean shouldLoadHomeFragOnBackPress = true;
 
     public static int navItemIndex = 0;
 
@@ -36,28 +38,14 @@ public class MainActivity extends AppCompatActivity
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        initializeNavigationView();
 
         if(savedInstanceState == null) {
             navItemIndex = 0;
             CURRENT_TAG = Constants.TAG_HOME;
             loadHomeFragment();
-        }
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
     }
 
@@ -83,48 +71,89 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        switch (item.getItemId()) {
-            //Replace the itemIndex and tags
-            case R.id.nav_home:
-                navItemIndex = 0;
-                break;
-            case R.id.nav_school:
-                navItemIndex = 1;
-                break;
-            case R.id.nav_lunch:
-                navItemIndex = 2;
-                break;
-            case R.id.nav_settings:
-                navItemIndex = 3;
-                break;
-            case R.id.nav_share:
-                //Start an app/activity that can send the apk to someone.
-                drawer.closeDrawers();
-                return true;
-            case R.id.nav_send:
-                //Start the default email host on the device.
-                drawer.closeDrawers();
-                return true;
-            default:
-                navItemIndex = 0;
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawers();
+            return;
         }
 
-        if(item.isChecked()) {
-            item.setChecked(false);
-        } else {
-            item.setChecked(true);
+        // This code loads home fragment when back key is pressed
+        // when user is in other fragment than home
+        if (shouldLoadHomeFragOnBackPress) {
+            // checking if user is on other navigation menu
+            // rather than home
+            if (navItemIndex != 0) {
+                navItemIndex = 0;
+                CURRENT_TAG = Constants.TAG_HOME;
+                loadHomeFragment();
+                return;
+            }
         }
-        item.setChecked(true);
 
-        loadHomeFragment();
+        super.onBackPressed();
+    }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
+    private void initializeNavigationView() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    //Replace the itemIndex and tags
+                    case R.id.nav_home:
+                        navItemIndex = 0;
+                        CURRENT_TAG = Constants.TAG_HOME;
+                        break;
+                    case R.id.nav_school:
+                        navItemIndex = 1;
+                        CURRENT_TAG = Constants.TAG_SCHOOL;
+                        break;
+                    case R.id.nav_lunch:
+                        navItemIndex = 2;
+                        break;
+                    case R.id.nav_settings:
+                        navItemIndex = 3;
+                        break;
+                    case R.id.nav_share:
+                        //Start an app/activity that can send the apk to someone.
+                        drawer.closeDrawers();
+                        return true;
+                    case R.id.nav_send:
+                        //Start the default email host on the device.
+                        drawer.closeDrawers();
+                        return true;
+                    default:
+                        navItemIndex = 0;
+                }
+
+                if(item.isChecked()) {
+                    item.setChecked(false);
+                } else {
+                    item.setChecked(true);
+                }
+                item.setChecked(true);
+
+                loadHomeFragment();
+                return true;
+            }
+        });
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                super.onDrawerClosed(drawerView);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
     }
 
     private Fragment getHomeFragment() {
@@ -141,7 +170,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void loadHomeFragment() {
-        if(getSupportFragmentManager().findFragmentByTag(Constants.TAG_HOME) != null) {
+        if(getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
             return;
         }
@@ -164,5 +193,6 @@ public class MainActivity extends AppCompatActivity
         }
 
         drawer.closeDrawers();
+        invalidateOptionsMenu();
     }
 }

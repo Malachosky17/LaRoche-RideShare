@@ -10,4 +10,9 @@
         android:layout_height="match_parent"
         android:text="Blank Home Fragment" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_menu_gallery"
+        android:layout_gravity="center"/>
 </FrameLayout>
