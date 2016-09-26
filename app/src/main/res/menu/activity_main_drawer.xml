@@ -5,14 +5,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Home" />
+            android:title="Home Page" />
         <item
             android:id="@+id/nav_school"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="School" />
+            android:title="School Transportation" />
         <item
             android:id="@+id/nav_lunch"
             android:icon="@drawable/ic_menu_slideshow"
+            android:title="Off-Campus Transportation" />
             android:title="Lunch" />
         <item
             android:id="@+id/nav_scheduler"
@@ -29,7 +30,7 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="About Us" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"
