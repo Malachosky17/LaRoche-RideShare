@@ -1,8 +1,20 @@
 <resources>
     <string name="app_name">La Roche RideShare</string>
+    <string name="laroche_website">www.laroche.edu</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>School</item>
+        <item>Lunch</item>
+        <item>Settings</item>
+        <item></item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

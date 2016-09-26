@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_class_scheduler_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="5"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.products.laroche.larocherideshare.ClassSchedulerContainer">
+
+    <Button
+        android:id="@+id/button_monday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monday"
+        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_weight="1"
+        android:onClick="handleButtonPress"/>
+
+    <Button
+        android:id="@+id/button_tuesday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tuesday"
+        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_weight="1"
+        android:onClick="handleButtonPress"/>
+
+    <Button
+        android:id="@+id/button_wednesday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wednesday"
+        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_weight="1"
+        android:onClick="handleButtonPress"/>
+
+    <Button
+        android:id="@+id/button_thursday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thursday"
+        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_weight="1"
+        android:onClick="handleButtonPress"/>
+
+    <Button
+        android:id="@+id/button_friday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Friday"
+        android:textSize="30dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:layout_weight="1"
+        android:onClick="handleButtonPress"/>
+
+</LinearLayout>

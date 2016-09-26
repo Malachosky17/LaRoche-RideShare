@@ -1,5 +1,6 @@
 package com.products.laroche.larocherideshare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -10,14 +11,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.products.laroche.larocherideshare.model.Constants;
 
 public class MainActivity extends AppCompatActivity {
-
 
     private static String CURRENT_TAG = Constants.TAG_HOME;
     private DrawerLayout drawer;
@@ -110,9 +114,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_lunch:
                         navItemIndex = 2;
+                        CURRENT_TAG = Constants.TAG_LUNCH;
+                        break;
+                    case R.id.nav_scheduler:
+                        startActivity(new Intent(MainActivity.this, ClassSchedulerContainer.class));
+                        drawer.closeDrawers();
                         break;
                     case R.id.nav_settings:
-                        navItemIndex = 3;
                         break;
                     case R.id.nav_share:
                         //Start an app/activity that can send the apk to someone.
@@ -164,6 +172,10 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 SchoolScheduler schoolFragment = new SchoolScheduler();
                 return schoolFragment;
+            case 2:
+                //Lunch Scheduler
+                LunchScheduler lunchFragment = new LunchScheduler();
+                return lunchFragment;
             default:
                 return new HomeDescription();
         }
