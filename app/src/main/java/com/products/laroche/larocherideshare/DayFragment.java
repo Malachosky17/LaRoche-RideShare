@@ -68,7 +68,7 @@ public class DayFragment extends Fragment {
             case "Monday":
                 return inflater.inflate(R.layout.fragment_day, container, false);
             case "Tuesday":
-                return inflater.inflate(R.layout.fragment_school_scheduler, container, false);
+                return inflater.inflate(R.layout.fragment_tuesday, container, false);
             case "Wednesday":
 
             case "Thursday":
