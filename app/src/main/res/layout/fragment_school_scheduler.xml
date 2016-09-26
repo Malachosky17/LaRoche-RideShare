@@ -9,6 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="School Transportation Page"
+        android:textSize="30dp"
+        android:textColor="#ff0000"
+
         />
 
 </FrameLayout>
