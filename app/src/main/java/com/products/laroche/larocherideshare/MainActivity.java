@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawers();
                         break;
                     case R.id.nav_settings:
+                        startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                        drawer.closeDrawers();
                         break;
                     case R.id.nav_share:
                         //Start an app/activity that can send the apk to someone.

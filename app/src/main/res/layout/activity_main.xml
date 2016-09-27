@@ -22,4 +22,9 @@
         app:headerLayout="@layout/nav_header_main"
         app:menu="@menu/activity_main_drawer" />
 
+    <!-- Add "sponsors" and "carbon footprint" companies
+        Computer Reach,
+
+     -->
+
 </android.support.v4.widget.DrawerLayout>
