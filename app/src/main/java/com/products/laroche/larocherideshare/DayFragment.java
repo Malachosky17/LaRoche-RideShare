@@ -66,7 +66,7 @@ public class DayFragment extends Fragment {
         // Inflate the layout for this fragment
         switch(getArguments().getString("from classschedulercontainer")) {
             case "Monday":
-                return inflater.inflate(R.layout.fragment_day, container, false);
+                return inflater.inflate(R.layout.fragment_monday, container, false);
             case "Tuesday":
                 return inflater.inflate(R.layout.fragment_tuesday, container, false);
             case "Wednesday":
@@ -77,7 +77,7 @@ public class DayFragment extends Fragment {
 
 
         }
-        return inflater.inflate(R.layout.fragment_day, container, false);
+        return inflater.inflate(R.layout.fragment_monday, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

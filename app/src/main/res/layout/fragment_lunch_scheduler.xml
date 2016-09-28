@@ -4,13 +4,98 @@
     android:layout_height="match_parent"
     tools:context="com.products.laroche.larocherideshare.LunchScheduler">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <TableLayout
+        android:id="@+id/schoolTableView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Lunch Schedule"
-        android:textSize="30dp"
-        android:textColor="#ff0000"
-        />
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="UserName"
+                android:layout_column="1"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Location"
+                android:layout_column="2"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Destination"
+                android:layout_column="3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Method"
+                android:layout_column="4"/>
+        </TableRow>
+
+        <View
+            android:layout_height="2dip"
+            android:background="#FF0000" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Joe Malachosky"
+                android:layout_column="1"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="La Roche College"
+                android:layout_column="2"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Ross Park Mall"
+                android:layout_column="3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver"
+                android:layout_column="4"/>
+
+        </TableRow>
+
+        <TableRow
+            android:paddingTop="5dp">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Brian Wargo"
+                android:layout_column="1"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="La Roche College"
+                android:layout_column="2"/>
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="15090"
+                android:layout_column="3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Driver"
+                android:layout_column="4"/>
+
+        </TableRow>
+    </TableLayout>
 
 </FrameLayout>
