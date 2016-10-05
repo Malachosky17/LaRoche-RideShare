@@ -9,8 +9,7 @@ public final class Constants {
     public static final String TAG_HOME = "home";
     public static final String TAG_SCHOOL = "school";
     public static final String TAG_LUNCH = "lunch";
-    public static final String TAG_SCHEDULER = "scheduler";
-    public static final String TAG_SETTINGS = "settings";
-    public static final String TAG_SHARE = "share";
-    public static final String TAG_SEND = "send";
+
+    public static final String SHARED_PREFERENCES = "shared_preferences";
+    public static final String PREFERENCES_LOGIN_STATUS = "google sign-in";
 }
