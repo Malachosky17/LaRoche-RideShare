@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "45394601856",
+    "project_id": "la-roche-rideshare"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:45394601856:android:a9f69a4213f4d9f3",
+        "android_client_info": {
+          "package_name": "com.products.laroche.larocherideshare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "45394601856-2efo58qsg648dm49n221j9ttj8jp8i4h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.products.laroche.larocherideshare",
+            "certificate_hash": "91598D2794D388E96B8F496A13591EE668536323"
+          }
+        },
+        {
+          "client_id": "45394601856-1742stodn0kq0o16huansvle4gu9d4ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtpI8af0VmhqUlO6SPoXhidMufYdS_yWY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
