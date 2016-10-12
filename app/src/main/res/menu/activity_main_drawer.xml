@@ -38,4 +38,13 @@
         </menu>
     </item>
 
+    <item android:title="@string/nav_sign_out_title">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_delete"
+                android:title="Logout"/>
+        </menu>
+    </item>
+
 </menu>
