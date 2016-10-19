@@ -18,7 +18,6 @@ import android.view.View;
 
 import com.products.laroche.larocherideshare.model.Constants;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private static String CURRENT_TAG = Constants.TAG_HOME;
@@ -39,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
          * Uncomment the if-statement below when testing release apk.
          * --Commented out to test debug builds--
          */
-        if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+//        if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -125,9 +124,9 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 1;
                         CURRENT_TAG = Constants.TAG_SCHOOL;
                         break;
-                    case R.id.nav_lunch:
+                    case R.id.nav_how_to:
                         navItemIndex = 2;
-                        CURRENT_TAG = Constants.TAG_LUNCH;
+                        CURRENT_TAG = Constants.TAG_HOW_TO;
                         break;
                     case R.id.nav_scheduler:
                         startActivity(new Intent(MainActivity.this, ClassSchedulerContainer.class));

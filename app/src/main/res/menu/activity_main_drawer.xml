@@ -9,12 +9,7 @@
         <item
             android:id="@+id/nav_school"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="School Transportation" />
-        <item
-            android:id="@+id/nav_lunch"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Off-Campus Transportation" />
-            android:title="Lunch" />
+            android:title="Transportation" />
         <item
             android:id="@+id/nav_scheduler"
             android:icon="@android:drawable/ic_menu_my_calendar"
@@ -23,6 +18,11 @@
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"
             android:title="Settings" />
+        <item
+            android:id="@+id/nav_how_to"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="How-To"
+            />
     </group>
 
     <item android:title="Communicate">
