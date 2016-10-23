@@ -1,8 +1,10 @@
 package com.products.laroche.larocherideshare;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,15 @@ public class SchoolScheduler extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        FloatingActionButton fab = (FloatingActionButton)getView().findViewById(R.id.messagingFAB);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_MAIN);
+//                intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                intent.setType("vnd.android-dir/mms-sms");
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

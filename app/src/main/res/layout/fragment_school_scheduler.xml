@@ -109,6 +109,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:id="@+id/floatingActionButton"
+        android:id="@+id/messagingFAB"
         android:layout_margin="20dp"/>
 </RelativeLayout>
