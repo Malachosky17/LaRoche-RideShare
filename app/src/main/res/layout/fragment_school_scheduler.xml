@@ -8,99 +8,55 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TableLayout
-            android:id="@+id/schoolTableView"
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*">
+            android:text="Entertainment"
+            android:padding="40dp"
+            android:layout_marginTop="20dp"
+            android:textSize="35dp"
+            android:id="@+id/Entertainment"
+            android:background="@android:color/holo_red_light"
+            />
 
-            <TableRow>
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="UserName"
-                    android:layout_column="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="School/Home"
+            android:padding="40dp"
+            android:layout_below="@id/Entertainment"
+            android:textSize="35dp"
+            android:id="@+id/School_Home"
+            android:background="@android:color/holo_blue_light"
+            />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Location"
-                    android:layout_column="2"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:padding="40dp"
+            android:layout_below="@id/School_Home"
+            android:textSize="35dp"
+            android:id="@+id/Food"
+            android:background="@android:color/holo_green_light"
+            />
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Destination"
-                    android:layout_column="3"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Utilities"
+            android:padding="40dp"
+            android:layout_below="@id/Food"
+            android:textSize="35dp"
+            android:id="@+id/Utilities"
+            android:background="@android:color/holo_orange_light"
+            />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Method"
-                    android:layout_column="4"/>
-            </TableRow>
 
-            <View
-                android:layout_height="2dip"
-                android:background="#FF0000" />
 
-            <TableRow>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Joe Malachosky"
-                    android:layout_column="1"/>
 
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="15090"
-                    android:layout_column="2"/>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="La Roche College"
-                    android:layout_column="3"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Driver"
-                    android:layout_column="4"/>
-
-            </TableRow>
-
-            <TableRow
-                android:paddingTop="5dp">
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="Brian Wargo"
-                    android:layout_column="1"/>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="La Roche College"
-                    android:layout_column="2"/>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="15090"
-                    android:layout_column="3"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Driver"
-                    android:layout_column="4"/>
-
-            </TableRow>
-        </TableLayout>
     </RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:src="@android:drawable/ic_dialog_email"
