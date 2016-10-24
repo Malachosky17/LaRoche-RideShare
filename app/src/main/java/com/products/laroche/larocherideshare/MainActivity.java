@@ -1,12 +1,16 @@
 package com.products.laroche.larocherideshare;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +23,10 @@ import android.view.View;
 import com.products.laroche.larocherideshare.model.Constants;
 
 public class MainActivity extends AppCompatActivity {
+
+    private final int MY_FINE_LOCATION_REQUEST = 1;
+    private final int MY_NETWORK_STATUS_REQUEST = 2;
+    private final int MY_INTERNET_REQUEST = 3;
 
     private static String CURRENT_TAG = Constants.TAG_HOME;
     private DrawerLayout drawer;
@@ -38,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
          * Uncomment the if-statement below when testing release apk.
          * --Commented out to test debug builds--
          */
-//        if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
-//            startActivity(new Intent(this, LoginActivity.class));
-//        }
+        if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = Constants.TAG_HOME;
             loadHomeFragment();
         }
+        checkPermissions();
     }
 
     @Override
@@ -138,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_share:
                         //Start an app/activity that can send the apk to someone.
+                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_send:
@@ -225,5 +235,47 @@ public class MainActivity extends AppCompatActivity {
 
         drawer.closeDrawers();
         invalidateOptionsMenu();
+    }
+
+    private void checkPermissions() {
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_FINE_LOCATION_REQUEST);
+        }
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NETWORK_STATE}, MY_NETWORK_STATUS_REQUEST);
+        }
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, MY_INTERNET_REQUEST);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_FINE_LOCATION_REQUEST: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Permission Granted
+                } else {
+                    //Permission Denied
+                }
+                return;
+            }
+            case MY_NETWORK_STATUS_REQUEST: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Permission Granted
+                } else {
+                    //Permission Denied
+                }
+                return;
+            }
+            case MY_INTERNET_REQUEST: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Permission Granted
+                } else {
+                    //Permission Denied
+                }
+                return;
+            }
+        }
     }
 }

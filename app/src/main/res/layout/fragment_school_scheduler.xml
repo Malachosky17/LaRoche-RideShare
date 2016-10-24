@@ -16,7 +16,7 @@
             android:padding="40dp"
             android:layout_marginTop="20dp"
             android:textSize="35dp"
-            android:id="@+id/Entertainment"
+            android:id="@+id/btnEntertainment"
             android:background="@android:color/holo_red_light"
             />
 
@@ -25,9 +25,9 @@
             android:layout_height="wrap_content"
             android:text="School/Home"
             android:padding="40dp"
-            android:layout_below="@id/Entertainment"
+            android:layout_below="@id/btnEntertainment"
             android:textSize="35dp"
-            android:id="@+id/School_Home"
+            android:id="@+id/btnSchool_Home"
             android:background="@android:color/holo_blue_light"
             />
 
@@ -36,9 +36,9 @@
             android:layout_height="wrap_content"
             android:text="Food"
             android:padding="40dp"
-            android:layout_below="@id/School_Home"
+            android:layout_below="@id/btnSchool_Home"
             android:textSize="35dp"
-            android:id="@+id/Food"
+            android:id="@+id/btnFood"
             android:background="@android:color/holo_green_light"
             />
 
@@ -47,9 +47,9 @@
             android:layout_height="wrap_content"
             android:text="Utilities"
             android:padding="40dp"
-            android:layout_below="@id/Food"
+            android:layout_below="@id/btnFood"
             android:textSize="35dp"
-            android:id="@+id/Utilities"
+            android:id="@+id/btnUtilities"
             android:background="@android:color/holo_orange_light"
             />
 
