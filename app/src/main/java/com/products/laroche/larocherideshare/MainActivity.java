@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity {
          * Uncomment the if-statement below when testing release apk.
          * --Commented out to test debug builds--
          */
-        if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
-            startActivity(new Intent(this, LoginActivity.class));
-        }
+      //  if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+     //       startActivity(new Intent(this, LoginActivity.class));
+      //  }
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
