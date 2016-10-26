@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                 HomeDescription homeFragment = new HomeDescription();
                 return homeFragment;
             case 1:
-                SchoolScheduler schoolFragment = new SchoolScheduler();
+                Transportation schoolFragment = new Transportation();
                 return schoolFragment;
             case 2:
                 //Lunch Scheduler

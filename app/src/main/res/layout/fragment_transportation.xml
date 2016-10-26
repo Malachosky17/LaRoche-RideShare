@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    tools:context="com.products.laroche.larocherideshare.SchoolScheduler">
+    tools:context="com.products.laroche.larocherideshare.Transportation">
 
         <Button
             android:layout_width="match_parent"

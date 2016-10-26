@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link LunchScheduler.OnFragmentInteractionListener} interface
+ * {@link SchoolHomeFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link LunchScheduler#newInstance} factory method to
+ * Use the {@link SchoolHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LunchScheduler extends Fragment {
+public class SchoolHomeFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,7 +29,7 @@ public class LunchScheduler extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public LunchScheduler() {
+    public SchoolHomeFragment() {
         // Required empty public constructor
     }
 
@@ -39,11 +39,11 @@ public class LunchScheduler extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LunchScheduler.
+     * @return A new instance of fragment SchoolHomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static LunchScheduler newInstance(String param1, String param2) {
-        LunchScheduler fragment = new LunchScheduler();
+    public static SchoolHomeFragment newInstance(String param1, String param2) {
+        SchoolHomeFragment fragment = new SchoolHomeFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,7 +64,7 @@ public class LunchScheduler extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lunch_scheduler, container, false);
+        return inflater.inflate(R.layout.fragment_school_home, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
