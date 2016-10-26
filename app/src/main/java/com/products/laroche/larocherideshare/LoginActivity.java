@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -37,6 +39,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     // UI references.
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog mProgressDialog;
+
+    private SignInButton signInButton = null;
+
     SharedPreferences sharedPreferences;
 
     @Override
@@ -62,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         // may be displayed when only basic profile is requested. Try adding the
         // Scopes.PLUS_LOGIN scope to the GoogleSignInOptions to see the
         // difference.
-        final SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setScopes(gso.getScopeArray());
 
@@ -74,27 +79,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onStart() {
         super.onStart();
-
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            showProgressDialog();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
+        updateUI();
     }
 
     // [START handleSignInResult]
@@ -109,12 +94,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
                 sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
                 startActivity(new Intent(this, MainActivity.class));
-                updateUI(true);
             }
         } else {
             // Signed out, show unauthenticated UI.
             sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, false).apply();
-            updateUI(false);
+            updateUI();
         }
     }
 
@@ -122,8 +106,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onBackPressed() {
         if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
             //Make user kill application without returning to the MainActivity
-            finish();
-            return;
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("NOT_LOGGED_IN", true);
+            startActivity(intent);
         }
         super.onBackPressed();
     }
@@ -177,12 +163,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+    private void updateUI() {
+        Log.i(TAG, "Value of shared preferences: " + sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false));
+        if (sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+            signInButton.setVisibility(View.GONE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
         } else {
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+            signInButton.setVisibility(View.VISIBLE);
             findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
     }
@@ -194,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onResult(Status status) {
                         sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, false).apply();
-                        updateUI(false);
+                        updateUI();
                     }
                 });
     }
@@ -207,7 +194,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onResult(Status status) {
                         sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, false).apply();
-                        updateUI(false);
+                        updateUI();
                     }
                 });
     }

@@ -18,15 +18,29 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.products.laroche.larocherideshare.model.Constants;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private static String TAG = MapsActivity.class.getSimpleName();
 
+    private String mapSearchInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                mapSearchInfo = null;
+            } else {
+                Log.v(TAG, "Extra passed into MapsActivity: " + extras.getString(Constants.MAP_SEARCH_EXTRAS));
+                mapSearchInfo = extras.getString(Constants.MAP_SEARCH_EXTRAS);
+            }
+        } else {
+            mapSearchInfo = (String) savedInstanceState.getSerializable(Constants.MAP_SEARCH_EXTRAS);
+        }
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -46,24 +60,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        //Adding retro-style to google maps.
-        if(getCurrentTime() > 17) {
+        //Set daytime or nighttime maps determined by time of day.
+        if(getCurrentTime() > 19) {
             MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.google_maps_nighttime);
             mMap.setMapStyle(styleOptions);
         } else {
             MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.google_maps_daytime);
             mMap.setMapStyle(styleOptions);
         }
+        // Add a marker near La Roche College and move the camera
         try {
             mMap.setMyLocationEnabled(true);
+            LatLng laRocheCollege = new LatLng(40.5683, -80.0141);
+            mMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College Area"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(laRocheCollege));
         } catch(SecurityException sEx) {
             Log.v(TAG, sEx.getMessage() + ": " + sEx.getCause());
         }
-        // Add a marker near La Roche College and move the camera
-        LatLng laRocheCollege = new LatLng(40.5683, -80.0141);
-        mMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College Area"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(laRocheCollege));
+        if(mapSearchInfo != null) {
+            //Here specifiy the places marked on map.
+            if(mapSearchInfo.contentEquals("food")) {
+                addFoodToMap();
+                Log.v(TAG, "You wanna search for food!");
+            } else if(mapSearchInfo.contentEquals("entertainment")) {
+                addEntertainmentToMap();
+                Log.v(TAG, "You wanna search for entertainment");
+            } else if(mapSearchInfo.contentEquals("utilities")) {
+                addUtilitiesToMap();
+                Log.v(TAG, "You wanna search for utilities");
+            }
+        }
     }
 
     private int getCurrentTime() {
@@ -74,7 +100,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         String localTime = date.format(currentLocalTime);
         int hour = Integer.parseInt(localTime.substring(0,2));
-        Toast.makeText(this, "Local Time: " + localTime + "    Hour Value: " + hour, Toast.LENGTH_LONG).show();
         return hour;
+    }
+
+    /*
+     * Add "food" places to mMap
+     * Examples: Local Restaurants, Ice cream, Pizza, etc.
+     */
+    private void addFoodToMap() {
+
+    }
+
+    /*
+     * Add "entertainment" places to mMap
+     * Examples: Movies, North Park, Laser Tag, etc.
+     */
+    private void addEntertainmentToMap() {
+
+    }
+
+    /*
+     * Add "utilities" places to mMap
+     * Examples: Hospital, gas stations, med express, etc.
+     */
+    private void addUtilitiesToMap() {
+
     }
 }

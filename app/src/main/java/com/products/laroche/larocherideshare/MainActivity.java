@@ -129,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         CURRENT_TAG = Constants.TAG_HOME;
                         break;
-                    case R.id.nav_school:
+                    case R.id.nav_transportation:
                         navItemIndex = 1;
-                        CURRENT_TAG = Constants.TAG_SCHOOL;
+                        CURRENT_TAG = Constants.TAG_TRANSPORTATION;
                         break;
                     case R.id.nav_how_to:
                         navItemIndex = 2;
@@ -147,16 +147,15 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_share:
                         //Start an app/activity that can send the apk to someone.
-                        startActivity(new Intent(MainActivity.this, MapsActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_send:
-                        //Start the default email host on the device.
+                        //Launch or host GMail
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_logout:
                         //Find out a way to logout from another activity...
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class).putExtra("STARTED_BY_USER_NAV",true));
                         drawer.closeDrawers();
                         return true;
                     default:
@@ -203,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
                 return schoolFragment;
             case 2:
                 //Lunch Scheduler
-                LunchScheduler lunchFragment = new LunchScheduler();
-                return lunchFragment;
+                HowToFragment howToFragment = new HowToFragment();
+                return howToFragment;
             default:
                 return new HomeDescription();
         }

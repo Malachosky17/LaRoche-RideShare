@@ -2,23 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     tools:context="com.products.laroche.larocherideshare.SchoolScheduler">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Entertainment"
             android:padding="40dp"
-            android:layout_marginTop="20dp"
             android:textSize="35dp"
             android:id="@+id/btnEntertainment"
-            android:background="@android:color/holo_red_light"
-            />
+            android:background="@android:color/holo_red_light"/>
 
         <Button
             android:layout_width="match_parent"
@@ -28,8 +23,7 @@
             android:layout_below="@id/btnEntertainment"
             android:textSize="35dp"
             android:id="@+id/btnSchool_Home"
-            android:background="@android:color/holo_blue_light"
-            />
+            android:background="@android:color/holo_blue_light"/>
 
         <Button
             android:layout_width="match_parent"
@@ -39,8 +33,7 @@
             android:layout_below="@id/btnSchool_Home"
             android:textSize="35dp"
             android:id="@+id/btnFood"
-            android:background="@android:color/holo_green_light"
-            />
+            android:background="@android:color/holo_green_light"/>
 
         <Button
             android:layout_width="match_parent"
@@ -50,21 +43,5 @@
             android:layout_below="@id/btnFood"
             android:textSize="35dp"
             android:id="@+id/btnUtilities"
-            android:background="@android:color/holo_orange_light"
-            />
-
-
-
-
-
-    </RelativeLayout>
-    <android.support.design.widget.FloatingActionButton
-        android:src="@android:drawable/ic_dialog_email"
-        app:fabSize="normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:id="@+id/messagingFAB"
-        android:layout_margin="20dp"/>
+            android:background="@android:color/holo_orange_light"/>
 </RelativeLayout>
