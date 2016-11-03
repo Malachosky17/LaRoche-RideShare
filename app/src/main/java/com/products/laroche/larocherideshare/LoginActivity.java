@@ -88,8 +88,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (result.isSuccess()) {
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            String email = acct.getEmail();
-            Log.i(TAG, "Email login: " + email);
+            sharedPreferences.edit().putString(Constants.PREFERENCES_USER_EMAIL, acct.getEmail()).apply();
+            Log.i(TAG, "Email login: " + acct.getEmail());
 
             if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
                 sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
