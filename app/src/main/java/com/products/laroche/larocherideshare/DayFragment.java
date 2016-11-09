@@ -129,6 +129,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Tuesday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -140,6 +141,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Wednesday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -147,6 +149,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Monday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -154,6 +157,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Thursday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -161,6 +165,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Tuesday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -168,6 +173,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Friday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -175,6 +181,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Wednesday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
@@ -182,6 +189,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 bundle.putString("from classschedulercontainer", "Thursday");
                 dayFragment.setArguments(bundle);
                 fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.addToBackStack(dayFragment.toString());
                 fragmentTransaction.commit();
                 break;
             }
