@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -17,15 +20,11 @@ import android.view.ViewGroup;
  * Use the {@link DayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DayFragment extends Fragment {
+public class DayFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = DayFragment.class.getSimpleName();
 
     private OnFragmentInteractionListener mListener;
 
@@ -45,8 +44,6 @@ public class DayFragment extends Fragment {
     public static DayFragment newInstance(String param1, String param2) {
         DayFragment fragment = new DayFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,38 +51,61 @@ public class DayFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = null;
         // Inflate the layout for this fragment
-        switch(getArguments().getString("from classschedulercontainer")) {
-            case "Monday":
-                return inflater.inflate(R.layout.fragment_monday, container, false);
-            case "Tuesday":
-                return inflater.inflate(R.layout.fragment_tuesday, container, false);
-            case "Wednesday":
-                return inflater.inflate(R.layout.fragment_wednesday, container, false);
-            case "Thursday":
-                return inflater.inflate(R.layout.fragment_thursday, container, false);
-            case "Friday":
-                return inflater.inflate(R.layout.fragment_friday, container, false);
-
-
+        try {
+            switch (getArguments().getString("from classschedulercontainer")) {
+                case "Monday": {
+                    view = inflater.inflate(R.layout.fragment_monday, container, false);
+                    Button btnMondayNext = (Button) view.findViewById(R.id.btn_monday_next);
+                    btnMondayNext.setOnClickListener(this);
+                    Button btnMondayPrev = (Button) view.findViewById(R.id.btn_monday_previous);
+                    btnMondayPrev.setOnClickListener(this);
+                    break;
+                }
+                case "Tuesday": {
+                    view = inflater.inflate(R.layout.fragment_tuesday, container, false);
+                    Button btnTuesdayNext = (Button) view.findViewById(R.id.btn_tuesday_next);
+                    btnTuesdayNext.setOnClickListener(this);
+                    Button btnTuesdayPrev = (Button) view.findViewById(R.id.btn_tuesday_previous);
+                    btnTuesdayPrev.setOnClickListener(this);
+                    break;
+                }
+                case "Wednesday": {
+                    view = inflater.inflate(R.layout.fragment_wednesday, container, false);
+                    Button btnWednesdayNext = (Button) view.findViewById(R.id.btn_wednesday_next);
+                    btnWednesdayNext.setOnClickListener(this);
+                    Button btnWednesdayPrev = (Button) view.findViewById(R.id.btn_wednesday_previous);
+                    btnWednesdayPrev.setOnClickListener(this);
+                    break;
+                }
+                case "Thursday": {
+                    view = inflater.inflate(R.layout.fragment_thursday, container, false);
+                    Button btnThursdayNext = (Button) view.findViewById(R.id.btn_thursday_next);
+                    btnThursdayNext.setOnClickListener(this);
+                    Button btnThursdayPrev = (Button) view.findViewById(R.id.btn_thursday_previous);
+                    btnThursdayPrev.setOnClickListener(this);
+                    break;
+                }
+                case "Friday": {
+                    view = inflater.inflate(R.layout.fragment_friday, container, false);
+                    Button btnFridayNext = (Button) view.findViewById(R.id.btn_friday_finish);
+                    btnFridayNext.setOnClickListener(this);
+                    Button btnFridayPrev = (Button) view.findViewById(R.id.btn_friday_previous);
+                    btnFridayPrev.setOnClickListener(this);
+                    break;
+                }
+            }
+        } catch (NullPointerException npe) {
+            Log.e(TAG, "Argument was: " + getArguments().getString("from classschedulercontainer") + " in " + TAG);
+            npe.printStackTrace();
         }
-        return inflater.inflate(R.layout.fragment_monday, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        return view;
     }
 
     @Override
@@ -97,6 +117,82 @@ public class DayFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Bundle bundle = new Bundle();
+        DayFragment dayFragment = new DayFragment();
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        switch(v.getId()) {
+            case R.id.btn_monday_next: {
+                bundle.putString("from classschedulercontainer", "Tuesday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_monday_previous: {
+                fragmentTransaction.remove(this).commit();
+                break;
+            }
+            case R.id.btn_tuesday_next: {
+                bundle.putString("from classschedulercontainer", "Wednesday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_tuesday_previous: {
+                bundle.putString("from classschedulercontainer", "Monday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_wednesday_next: {
+                bundle.putString("from classschedulercontainer", "Thursday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_wednesday_previous: {
+                bundle.putString("from classschedulercontainer", "Tuesday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_thursday_next: {
+                bundle.putString("from classschedulercontainer", "Friday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_thursday_previous: {
+                bundle.putString("from classschedulercontainer", "Wednesday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_friday_previous: {
+                bundle.putString("from classschedulercontainer", "Thursday");
+                dayFragment.setArguments(bundle);
+                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                fragmentTransaction.commit();
+                break;
+            }
+            case R.id.btn_friday_finish: {
+                fragmentTransaction.remove(this).commit();
+                break;
+            }
+            default: {
+                break;
+            }
+        }
     }
 
     /**

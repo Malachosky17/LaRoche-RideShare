@@ -1,15 +1,12 @@
 package com.products.laroche.larocherideshare;
 
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import static android.R.attr.button;
 
 public class ClassSchedulerContainer extends AppCompatActivity {
 

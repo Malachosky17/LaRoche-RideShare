@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/monday_fragment"
     tools:context="com.products.laroche.larocherideshare.Transportation">
 
     <TextView
@@ -80,6 +81,7 @@
         android:layout_below="@id/one_way_transport">
 
         <Button
+            android:id="@+id/btn_monday_previous"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Previous"
@@ -87,6 +89,7 @@
             android:textSize="18dp"/>
 
         <Button
+            android:id="@+id/btn_monday_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Next"
