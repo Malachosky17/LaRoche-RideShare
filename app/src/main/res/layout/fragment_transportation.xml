@@ -6,42 +6,55 @@
     android:paddingBottom="10dp"
     tools:context="com.products.laroche.larocherideshare.Transportation">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Where Do You Want To Go?"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"/>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Entertainment"
-            android:padding="40dp"
-            android:textSize="35dp"
+            android:padding="25dp"
+            android:textSize="25dp"
             android:id="@+id/btnEntertainment"
-            android:background="@android:color/holo_red_light"/>
+            android:background="#ff0000"
+            android:layout_marginTop="50dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="School/Home"
-            android:padding="40dp"
+            android:padding="25dp"
             android:layout_below="@id/btnEntertainment"
-            android:textSize="35dp"
+            android:textSize="25dp"
             android:id="@+id/btnSchool_Home"
-            android:background="@android:color/holo_blue_light"/>
+            android:background="#ff0000"
+            android:layout_marginTop="30dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Food"
-            android:padding="40dp"
+            android:padding="25dp"
             android:layout_below="@id/btnSchool_Home"
-            android:textSize="35dp"
+            android:textSize="25dp"
             android:id="@+id/btnFood"
-            android:background="@android:color/holo_green_light"/>
+            android:background="#ff0000"
+            android:layout_marginTop="30dp"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Utilities"
-            android:padding="40dp"
-            android:layout_below="@id/btnFood"
-            android:textSize="35dp"
+            android:padding="25dp"
+            android:textSize="25dp"
             android:id="@+id/btnUtilities"
-            android:background="@android:color/holo_orange_light"/>
+            android:background="#ff0000"
+            android:layout_below="@+id/btnFood"
+            android:layout_marginTop="30dp"/>
 </RelativeLayout>

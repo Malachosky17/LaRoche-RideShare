@@ -13,12 +13,26 @@
         android:layout_alignParentTop="true"
         android:text="How To:"
         android:padding="15dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Here will be a dscription of the application and how to use it..."
-        android:layout_below="@id/how_to_title"/>
+        android:text="        1. Open up the application. \n\n
+        2. Log in using your La Roche College email address. \n\n
+        3. Upload your schedule using the scheduler tab.
+       (Check no requested times for days you don't need a ride) \n\n
+        4. Set notification settings in settings tab. \n\n
+        5. To request a ride, go to the entertainment tab and select your destination. \n\n
+        6. When google maps opens up, select location on the map."
+        android:textSize="15dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:id="@+id/textView"
+        android:layout_below="@+id/how_to_title"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
