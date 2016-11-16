@@ -6,6 +6,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_sign_out_title">Sign Out</string>
     <string name="action_settings">Settings</string>
+    <string name="pickup_time_spinner">Pickup Time</string>
+    <string name="dropoff_time_spinner">Dropoff Time</string>
 
     <string name="login_activity">Login Activity</string>
 
@@ -16,6 +18,76 @@
         <item>Lunch</item>
         <item>Settings</item>
         <item></item>
+    </string-array>
+
+    <string-array name="pickup_time">
+        <item>N/A</item>
+        <item>6:00am</item>
+        <item>6:30am</item>
+        <item>7:00am</item>
+        <item>7:30am</item>
+        <item>8:00am</item>
+        <item>8:30am</item>
+        <item>9:00am</item>
+        <item>9:30am</item>
+        <item>10:00am</item>
+        <item>10:30am</item>
+        <item>11:00am</item>
+        <item>11:30am</item>
+        <item>12:00pm</item>
+        <item>12:30pm</item>
+        <item>1:00pm</item>
+        <item>1:30pm</item>
+        <item>2:00pm</item>
+        <item>2:30pm</item>
+        <item>3:00pm</item>
+        <item>3:30pm</item>
+        <item>4:00pm</item>
+        <item>4:30pm</item>
+        <item>5:00pm</item>
+        <item>5:30pm</item>
+        <item>6:00pm</item>
+        <item>6:30pm</item>
+        <item>7:00pm</item>
+        <item>7:30pm</item>
+        <item>8:00pm</item>
+        <item>8:30pm</item>
+        <item>9:00pm</item>
+    </string-array>
+
+    <string-array name="dropoff_time">
+        <item>N/A</item>
+        <item>6:00am</item>
+        <item>6:30am</item>
+        <item>7:00am</item>
+        <item>7:30am</item>
+        <item>8:00am</item>
+        <item>8:30am</item>
+        <item>9:00am</item>
+        <item>9:30am</item>
+        <item>10:00am</item>
+        <item>10:30am</item>
+        <item>11:00am</item>
+        <item>11:30am</item>
+        <item>12:00pm</item>
+        <item>12:30pm</item>
+        <item>1:00pm</item>
+        <item>1:30pm</item>
+        <item>2:00pm</item>
+        <item>2:30pm</item>
+        <item>3:00pm</item>
+        <item>3:30pm</item>
+        <item>4:00pm</item>
+        <item>4:30pm</item>
+        <item>5:00pm</item>
+        <item>5:30pm</item>
+        <item>6:00pm</item>
+        <item>6:30pm</item>
+        <item>7:00pm</item>
+        <item>7:30pm</item>
+        <item>8:00pm</item>
+        <item>8:30pm</item>
+        <item>9:00pm</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

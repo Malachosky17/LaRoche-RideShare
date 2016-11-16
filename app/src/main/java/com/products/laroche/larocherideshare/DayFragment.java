@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
+import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +29,12 @@ public class DayFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = DayFragment.class.getSimpleName();
 
     private OnFragmentInteractionListener mListener;
+
+    private Spinner pickUpTime = null;
+    private Spinner dropOffTime = null;
+
+    private CheckBox noClassCheckBox = null;
+    private CheckBox oneWayTrans = null;
 
     public DayFragment() {
         // Required empty public constructor
@@ -56,12 +64,21 @@ public class DayFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //Resetting the view
         View view = null;
+        pickUpTime = null;
+        dropOffTime = null;
+        noClassCheckBox = null;
+        oneWayTrans = null;
         // Inflate the layout for this fragment
         try {
             switch (getArguments().getString("from classschedulercontainer")) {
                 case "Monday": {
                     view = inflater.inflate(R.layout.fragment_monday, container, false);
+                    pickUpTime = (Spinner) view.findViewById(R.id.monday_pickup_spinner);
+                    dropOffTime = (Spinner) view.findViewById(R.id.monday_dropoff_spinner);
+                    noClassCheckBox = (CheckBox) view.findViewById(R.id.monday_no_class_checkbox);
+                    oneWayTrans = (CheckBox) view.findViewById(R.id.monday_one_way_transport);
                     Button btnMondayNext = (Button) view.findViewById(R.id.btn_monday_next);
                     btnMondayNext.setOnClickListener(this);
                     Button btnMondayPrev = (Button) view.findViewById(R.id.btn_monday_previous);
@@ -70,6 +87,10 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 }
                 case "Tuesday": {
                     view = inflater.inflate(R.layout.fragment_tuesday, container, false);
+                    pickUpTime = (Spinner) view.findViewById(R.id.tuesday_pickup_spinner);
+                    dropOffTime = (Spinner) view.findViewById(R.id.tuesday_dropoff_spinner);
+                    noClassCheckBox = (CheckBox) view.findViewById(R.id.tuesday_no_class_checkbox);
+                    oneWayTrans = (CheckBox) view.findViewById(R.id.tuesday_one_way_transport);
                     Button btnTuesdayNext = (Button) view.findViewById(R.id.btn_tuesday_next);
                     btnTuesdayNext.setOnClickListener(this);
                     Button btnTuesdayPrev = (Button) view.findViewById(R.id.btn_tuesday_previous);
@@ -78,6 +99,10 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 }
                 case "Wednesday": {
                     view = inflater.inflate(R.layout.fragment_wednesday, container, false);
+                    pickUpTime = (Spinner) view.findViewById(R.id.wednesday_pickup_spinner);
+                    dropOffTime = (Spinner) view.findViewById(R.id.wednesday_dropoff_spinner);
+                    noClassCheckBox = (CheckBox) view.findViewById(R.id.wednesday_no_class_checkbox);
+                    oneWayTrans = (CheckBox) view.findViewById(R.id.wednesday_one_way_transport);
                     Button btnWednesdayNext = (Button) view.findViewById(R.id.btn_wednesday_next);
                     btnWednesdayNext.setOnClickListener(this);
                     Button btnWednesdayPrev = (Button) view.findViewById(R.id.btn_wednesday_previous);
@@ -86,6 +111,10 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 }
                 case "Thursday": {
                     view = inflater.inflate(R.layout.fragment_thursday, container, false);
+                    pickUpTime = (Spinner) view.findViewById(R.id.thursday_pickup_spinner);
+                    dropOffTime = (Spinner) view.findViewById(R.id.thursday_dropoff_spinner);
+                    noClassCheckBox = (CheckBox) view.findViewById(R.id.thursday_no_class_checkbox);
+                    oneWayTrans = (CheckBox) view.findViewById(R.id.thursday_one_way_transport);
                     Button btnThursdayNext = (Button) view.findViewById(R.id.btn_thursday_next);
                     btnThursdayNext.setOnClickListener(this);
                     Button btnThursdayPrev = (Button) view.findViewById(R.id.btn_thursday_previous);
@@ -94,6 +123,10 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 }
                 case "Friday": {
                     view = inflater.inflate(R.layout.fragment_friday, container, false);
+                    pickUpTime = (Spinner) view.findViewById(R.id.friday_pickup_spinner);
+                    dropOffTime = (Spinner) view.findViewById(R.id.friday_dropoff_spinner);
+                    noClassCheckBox = (CheckBox) view.findViewById(R.id.friday_no_class_checkbox);
+                    oneWayTrans = (CheckBox) view.findViewById(R.id.friday_one_way_transport);
                     Button btnFridayNext = (Button) view.findViewById(R.id.btn_friday_finish);
                     btnFridayNext.setOnClickListener(this);
                     Button btnFridayPrev = (Button) view.findViewById(R.id.btn_friday_previous);
@@ -124,82 +157,105 @@ public class DayFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = new Bundle();
         DayFragment dayFragment = new DayFragment();
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        switch(v.getId()) {
-            case R.id.btn_monday_next: {
-                bundle.putString("from classschedulercontainer", "Tuesday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
+        if(validateTimes()) {
+            switch (v.getId()) {
+                case R.id.btn_monday_next: {
+                    bundle.putString("from classschedulercontainer", "Tuesday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.addToBackStack("monday");
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_monday_previous: {
+                    fragmentTransaction.remove(this).commit();
+                    break;
+                }
+                case R.id.btn_tuesday_next: {
+                    bundle.putString("from classschedulercontainer", "Wednesday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.addToBackStack("tuesday");
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_tuesday_previous: {
+                    bundle.putString("from classschedulercontainer", "Monday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_wednesday_next: {
+                    bundle.putString("from classschedulercontainer", "Thursday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.addToBackStack("wednesday");
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_wednesday_previous: {
+                    bundle.putString("from classschedulercontainer", "Tuesday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_thursday_next: {
+                    bundle.putString("from classschedulercontainer", "Friday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.addToBackStack("thursday");
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_thursday_previous: {
+                    bundle.putString("from classschedulercontainer", "Wednesday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_friday_previous: {
+                    bundle.putString("from classschedulercontainer", "Thursday");
+                    dayFragment.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
+                    fragmentTransaction.commit();
+                    break;
+                }
+                case R.id.btn_friday_finish: {
+                    fragmentTransaction.addToBackStack("friday");
+                    fragmentTransaction.remove(this).commit();
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
-            case R.id.btn_monday_previous: {
-                fragmentTransaction.remove(this).commit();
-                break;
+        }
+    }
+
+    private boolean validateTimes() {
+        if(noClassCheckBox.isChecked()) {
+            return true;
+        }
+        if(oneWayTrans.isChecked()) {
+            if(!pickUpTime.getSelectedItem().toString().contentEquals("N/A") ||
+                    !dropOffTime.getSelectedItem().toString().contentEquals("N/A")) {
+                return true;
+            } else {
+                //Prompt user for input
+                Toast.makeText(getActivity(), "Error: Missing at least one entry", Toast.LENGTH_LONG).show();
+                return false;
             }
-            case R.id.btn_tuesday_next: {
-                bundle.putString("from classschedulercontainer", "Wednesday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_tuesday_previous: {
-                bundle.putString("from classschedulercontainer", "Monday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_wednesday_next: {
-                bundle.putString("from classschedulercontainer", "Thursday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_wednesday_previous: {
-                bundle.putString("from classschedulercontainer", "Tuesday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_thursday_next: {
-                bundle.putString("from classschedulercontainer", "Friday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_thursday_previous: {
-                bundle.putString("from classschedulercontainer", "Wednesday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_friday_previous: {
-                bundle.putString("from classschedulercontainer", "Thursday");
-                dayFragment.setArguments(bundle);
-                fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                fragmentTransaction.addToBackStack(dayFragment.toString());
-                fragmentTransaction.commit();
-                break;
-            }
-            case R.id.btn_friday_finish: {
-                fragmentTransaction.remove(this).commit();
-                break;
-            }
-            default: {
-                break;
-            }
+        }
+        if(!pickUpTime.getSelectedItem().toString().contentEquals("N/A") &&
+                !dropOffTime.getSelectedItem().toString().contentEquals("N/A")) {
+            return true;
+        } else {
+            //Prompt user for input
+            Toast.makeText(getActivity(), "Error: Missing pickup and dropoff times.", Toast.LENGTH_LONG).show();
+            return false;
         }
     }
 
