@@ -8,6 +8,7 @@
     <string name="action_settings">Settings</string>
     <string name="pickup_time_spinner">Pickup Time</string>
     <string name="dropoff_time_spinner">Dropoff Time</string>
+    <string name="class_scheduler_signal">from classschedulercontainer</string>
 
     <string name="login_activity">Login Activity</string>
 
@@ -171,4 +172,7 @@
     <string name="disconnect">Disconnect</string>
     <string name="loading">Loading...</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="error_one_entry">Error: Missing at least one entry.</string>
+    <string name="error_two_entries">Error: Missing pickup and drop off times.</string>
 </resources>

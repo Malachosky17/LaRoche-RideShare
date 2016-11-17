@@ -14,6 +14,8 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.products.laroche.larocherideshare.model.Constants;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -135,7 +137,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 }
             }
         } catch (NullPointerException npe) {
-            Log.e(TAG, "Argument was: " + getArguments().getString("from classschedulercontainer") + " in " + TAG);
+            Log.e(TAG, "Argument was: " + getArguments().getString(getString(R.string.class_scheduler_signal)) + " in " + TAG);
             npe.printStackTrace();
         }
         return view;
@@ -160,10 +162,10 @@ public class DayFragment extends Fragment implements View.OnClickListener {
         if(validateTimes()) {
             switch (v.getId()) {
                 case R.id.btn_monday_next: {
-                    bundle.putString("from classschedulercontainer", "Tuesday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[1]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                    fragmentTransaction.addToBackStack("monday");
+                    fragmentTransaction.addToBackStack(Constants.WEEKDAYS[0]);
                     fragmentTransaction.commit();
                     break;
                 }
@@ -172,59 +174,59 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                     break;
                 }
                 case R.id.btn_tuesday_next: {
-                    bundle.putString("from classschedulercontainer", "Wednesday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[2]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                    fragmentTransaction.addToBackStack("tuesday");
+                    fragmentTransaction.addToBackStack(Constants.WEEKDAYS[1]);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_tuesday_previous: {
-                    bundle.putString("from classschedulercontainer", "Monday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[0]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_wednesday_next: {
-                    bundle.putString("from classschedulercontainer", "Thursday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[3]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                    fragmentTransaction.addToBackStack("wednesday");
+                    fragmentTransaction.addToBackStack(Constants.WEEKDAYS[2]);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_wednesday_previous: {
-                    bundle.putString("from classschedulercontainer", "Tuesday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[1]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_thursday_next: {
-                    bundle.putString("from classschedulercontainer", "Friday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[4]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
-                    fragmentTransaction.addToBackStack("thursday");
+                    fragmentTransaction.addToBackStack(Constants.WEEKDAYS[3]);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_thursday_previous: {
-                    bundle.putString("from classschedulercontainer", "Wednesday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[2]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_friday_previous: {
-                    bundle.putString("from classschedulercontainer", "Thursday");
+                    bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[3]);
                     dayFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, dayFragment);
                     fragmentTransaction.commit();
                     break;
                 }
                 case R.id.btn_friday_finish: {
-                    fragmentTransaction.addToBackStack("friday");
+                    fragmentTransaction.addToBackStack(Constants.WEEKDAYS[4]);
                     fragmentTransaction.remove(this).commit();
                     break;
                 }
@@ -245,7 +247,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 return true;
             } else {
                 //Prompt user for input
-                Toast.makeText(getActivity(), "Error: Missing at least one entry", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), R.string.error_one_entry, Toast.LENGTH_LONG).show();
                 return false;
             }
         }
@@ -254,7 +256,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
             return true;
         } else {
             //Prompt user for input
-            Toast.makeText(getActivity(), "Error: Missing pickup and dropoff times.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), R.string.error_two_entries, Toast.LENGTH_LONG).show();
             return false;
         }
     }

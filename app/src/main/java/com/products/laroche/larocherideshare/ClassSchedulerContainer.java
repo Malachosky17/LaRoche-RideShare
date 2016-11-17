@@ -31,7 +31,6 @@ public class ClassSchedulerContainer extends AppCompatActivity {
                 getSupportFragmentManager().popBackStack();
             }
         }
-
         if(count == 0) {
             super.onBackPressed();
         } else {

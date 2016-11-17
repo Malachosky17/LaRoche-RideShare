@@ -15,4 +15,6 @@ public final class Constants {
     public static final String PREFERENCES_USER_EMAIL = "email_here";
 
     public static final String MAP_SEARCH_EXTRAS = "search_for_this";
+
+    public static final String[] WEEKDAYS = {"Monday","Tuesday","Wednesday","Thursday","Friday"};
 }
