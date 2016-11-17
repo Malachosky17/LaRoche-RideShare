@@ -277,4 +277,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+public void handleProfileButton(View view){
+        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
 }

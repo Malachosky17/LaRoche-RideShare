@@ -7,8 +7,6 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-
-    <!-- KeyStore password: L3BF2EJ32HK7SE0J -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -38,6 +36,9 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/login_activity"></activity>
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Profile Activity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
