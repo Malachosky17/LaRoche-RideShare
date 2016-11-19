@@ -150,7 +150,13 @@ public class MainActivity extends AppCompatActivity {
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_send:
-                        //Launch or host GMail
+                        //Launch email application that is chosen by the user.
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+                        intent.setType("plain/text");
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"joseph.malachosky@stu.laroche.edu"});
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Welcome to LaRocheRideShare!");
+                        intent.putExtra(Intent.EXTRA_TEXT, "Body of message.");
+                        startActivity(intent);
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_logout:
