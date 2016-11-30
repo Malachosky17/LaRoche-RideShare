@@ -103,6 +103,14 @@
             android:padding="18dp"
             android:textSize="18dp"/>
 
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:padding="18dp"
+            android:textSize="18dp" />
+
     </LinearLayout>
 
 

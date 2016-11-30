@@ -85,7 +85,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/monday_one_way_transport">
+        android:layout_below="@+id/monday_one_way_transport"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/btn_monday_previous"
@@ -102,6 +104,14 @@
             android:text="Next"
             android:padding="18dp"
             android:textSize="18dp"/>
+
+        <Button
+            android:id="@+id/monday_apply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apply"
+            android:padding="18dp"
+            android:textSize="18dp" />
 
     </LinearLayout>
 
