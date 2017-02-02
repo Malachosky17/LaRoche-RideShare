@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -16,11 +17,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.products.laroche.larocherideshare.model.Constants;
+
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +73,19 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = Constants.TAG_HOME;
             loadHomeFragment();
         }
-        checkPermissions();
+//        checkPermissions();
+//        Thread thread = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                String url = "http://localhost:8080/restaurants";
+//                RestTemplate restTemplate = new RestTemplate();
+//                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+//                Log.i("Malachosky", restTemplate.getForObject(url, String.class, "Android"));
+//            }
+//        });
+//        thread.setDaemon(true);
+//        thread.start();
+//        System.out.println(restTemplate.getForObject(url, String.class, "Android"));
     }
 
     @Override
@@ -284,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-public void handleProfileButton(View view){
+    public void handleProfileButton(View view){
         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(intent);
     }

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.products.laroche.larocherideshare"
         minSdkVersion 15
@@ -33,5 +33,6 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:9.8.0'
     compile 'com.google.android.gms:play-services-maps:9.8.0'
     compile 'com.google.android.gms:play-services-places:9.8.0'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
     testCompile 'junit:junit:4.12'
 }

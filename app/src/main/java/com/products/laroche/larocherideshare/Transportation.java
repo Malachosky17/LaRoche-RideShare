@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.products.laroche.larocherideshare.model.Constants;
+
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -115,6 +120,9 @@ public class Transportation extends Fragment implements View.OnClickListener {
                 break;
             }
             case R.id.btnEntertainment: {
+                final String url = "http://10.0.2.2:8080/restaurants";
+                HttpRequestTask httpRequest = new HttpRequestTask();
+                httpRequest.execute(url);
                 intent = new Intent(getContext(), MapsActivity.class);
                 intent.putExtra(Constants.MAP_SEARCH_EXTRAS, "entertainment");
                 break;
@@ -176,5 +184,27 @@ public class Transportation extends Fragment implements View.OnClickListener {
         btnEntertainment.setOnClickListener(this);
         btnSchool_Home.setOnClickListener(this);
         btnUtilities.setOnClickListener(this);
+    }
+
+    private class HttpRequestTask extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... url) {
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
+                return restTemplate.getForObject(url[0], String.class, "Android");
+            } catch (Exception e) {
+                Log.e("MainActivity", e.getMessage(), e);
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Toast.makeText(getActivity(), result, Toast.LENGTH_LONG).show();
+            System.out.println(result);
+        }
     }
 }
