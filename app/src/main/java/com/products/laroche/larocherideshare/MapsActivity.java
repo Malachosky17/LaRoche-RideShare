@@ -2,14 +2,16 @@ package com.products.laroche.larocherideshare;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,32 +21,26 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.products.laroche.larocherideshare.model.Constants;
-
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
+import com.products.laroche.larocherideshare.model.MyPlace;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private static String TAG = MapsActivity.class.getSimpleName();
+    private static String LOGTAG = MapsActivity.class.getSimpleName();
 
     private String mapSearchInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(savedInstanceState == null) {
-            Bundle extras = getIntent().getExtras();
-            if(extras == null) {
-                mapSearchInfo = null;
-            } else {
-                Log.v(TAG, "Extra passed into MapsActivity: " + extras.getString(Constants.MAP_SEARCH_EXTRAS));
-                mapSearchInfo = extras.getString(Constants.MAP_SEARCH_EXTRAS);
-            }
-        } else {
-            mapSearchInfo = (String) savedInstanceState.getSerializable(Constants.MAP_SEARCH_EXTRAS);
-        }
         setContentView(R.layout.activity_maps);
+        Log.i(LOGTAG, "onCreate");
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) {
+            mapSearchInfo = null;
+        } else {
+            mapSearchInfo = (String) extras.getString(Constants.MAP_SEARCH_EXTRAS);
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -62,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        Log.i(LOGTAG, "onMapReady");
         mMap = googleMap;
         //Set daytime or nighttime maps determined by time of day.
         if(getCurrentTime() > 19) {
@@ -76,22 +73,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.setMyLocationEnabled(true);
             LatLng laRocheCollege = new LatLng(40.5683, -80.0141);
             mMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College Area"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(laRocheCollege));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laRocheCollege, 15));
+            addMarkersToMap(mapSearchInfo);
         } catch(SecurityException sEx) {
-            Log.v(TAG, sEx.getMessage() + ": " + sEx.getCause());
-        }
-        if(mapSearchInfo != null) {
-            //Here specifiy the places marked on map.
-            if(mapSearchInfo.contentEquals("food")) {
-                addFoodToMap();
-                Log.v(TAG, "You wanna search for food!");
-            } else if(mapSearchInfo.contentEquals("entertainment")) {
-                addEntertainmentToMap();
-                Log.v(TAG, "You wanna search for entertainment");
-            } else if(mapSearchInfo.contentEquals("utilities")) {
-                addUtilitiesToMap();
-                Log.v(TAG, "You wanna search for utilities");
-            }
+            Log.e(LOGTAG, sEx.getMessage() + ": " + sEx.getCause());
         }
     }
 
@@ -110,23 +95,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      * Add "food" places to mMap
      * Examples: Local Restaurants, Ice cream, Pizza, etc.
      */
-    private void addFoodToMap() {
-
-    }
-
-    /*
-     * Add "entertainment" places to mMap
-     * Examples: Movies, North Park, Laser Tag, etc.
-     */
-    private void addEntertainmentToMap() {
-
-    }
-
-    /*
-     * Add "utilities" places to mMap
-     * Examples: Hospital, gas stations, med express, etc.
-     */
-    private void addUtilitiesToMap() {
-
+    private void addMarkersToMap(String urlTag) {
+        RetrieveSpringDataTask task = new RetrieveSpringDataTask();
+        try {
+            ArrayList<MyPlace> places = task.execute(urlTag).get();
+            if(!places.isEmpty()) {
+                for(MyPlace place : places) {
+                    LatLng location = new LatLng(place.getLocation()[0], place.getLocation()[1]);
+                    mMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
+                    Log.i(LOGTAG, place.getName());
+                }
+            }
+        } catch(InterruptedException | ExecutionException ie) {
+            Log.e(LOGTAG, ie.getMessage() + ": " + ie.getCause());
+        }
     }
 }

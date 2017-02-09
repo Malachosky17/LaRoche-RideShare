@@ -10,6 +10,8 @@ public final class Constants {
     public static final String TAG_TRANSPORTATION = "transportation";
     public static final String TAG_HOW_TO = "how-to";
 
+    public static final String HOST_URL = "http://10.0.2.2:8080/";
+
     public static final String SHARED_PREFERENCES = "shared_preferences";
     public static final String PREFERENCES_LOGIN_STATUS = "google sign-in";
     public static final String PREFERENCES_USER_EMAIL = "email_here";
