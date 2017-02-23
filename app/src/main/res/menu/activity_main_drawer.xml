@@ -6,14 +6,23 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="Home Page" />
+        <!--<item-->
+            <!--android:id="@+id/nav_transportation"-->
+            <!--android:icon="@drawable/ic_menu_gallery"-->
+            <!--android:title="Transportation" />-->
         <item
-            android:id="@+id/nav_transportation"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Transportation" />
+            android:id="@+id/nav_restaurants"
+            android:title="Restaurants" />
         <item
-            android:id="@+id/nav_scheduler"
-            android:icon="@android:drawable/ic_menu_my_calendar"
-            android:title="Scheduler" />
+            android:id="@+id/nav_entertainment"
+            android:title="Entertainment" />
+        <item
+            android:id="@+id/nav_utilities"
+            android:title="Utilities" />
+        <!--<item-->
+            <!--android:id="@+id/nav_scheduler"-->
+            <!--android:icon="@android:drawable/ic_menu_my_calendar"-->
+            <!--android:title="Scheduler" />-->
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_manage"

@@ -13,4 +13,11 @@
     tools:context="com.products.laroche.larocherideshare.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_spot">
+
+    </FrameLayout>
+
 </RelativeLayout>

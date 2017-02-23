@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -17,18 +16,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.products.laroche.larocherideshare.model.Constants;
-
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,21 +34,22 @@ public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
     private NavigationView navigationView;
     private boolean shouldLoadHomeFragOnBackPress = true;
-    SharedPreferences preferences;
+    SharedPreferences sharedPreferences;
 
     public static int navItemIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        preferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
-        /*
-         * Uncomment the if-statement below when testing release apk.
-         * --Commented out to test debug builds--
-         */
-      //  if(!preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
-     //       startActivity(new Intent(this, LoginActivity.class));
-      //  }
+        sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
+
+//        if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+//            if(getIntent().getBooleanExtra("NOT_LOGGED_IN", false)) {
+//                finish();
+//            }
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
+
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -73,40 +66,21 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = Constants.TAG_HOME;
             loadHomeFragment();
         }
-//        checkPermissions();
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                String url = "http://localhost:8080/restaurants";
-//                RestTemplate restTemplate = new RestTemplate();
-//                restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
-//                Log.i("Malachosky", restTemplate.getForObject(url, String.class, "Android"));
-//            }
-//        });
-//        thread.setDaemon(true);
-//        thread.start();
-//        System.out.println(restTemplate.getForObject(url, String.class, "Android"));
+        checkPermissions();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -116,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             drawer.closeDrawers();
             return;
         }
-
         // This code loads home fragment when back key is pressed
         // when user is in other fragment than home
         if (shouldLoadHomeFragOnBackPress) {
@@ -128,11 +101,12 @@ public class MainActivity extends AppCompatActivity {
                 loadHomeFragment();
                 return;
             }
-            if(navItemIndex == 0) {
-                if(preferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
-                    finish();
-                    return;
-                }
+            if(sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+                Intent intent = new Intent(this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+                return;
             }
         }
 
@@ -149,17 +123,24 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                         CURRENT_TAG = Constants.TAG_HOME;
                         break;
-                    case R.id.nav_transportation:
+                    case R.id.nav_restaurants:
                         navItemIndex = 1;
-                        CURRENT_TAG = Constants.TAG_TRANSPORTATION;
+                        sharedPreferences.edit().putString(Constants.MAP_SEARCH_EXTRAS, "locations/restaurants").apply();
+                        CURRENT_TAG = Constants.TAG_RESTAURANTS;
+                        break;
+                    case R.id.nav_entertainment:
+                        navItemIndex = 1;
+                        sharedPreferences.edit().putString(Constants.MAP_SEARCH_EXTRAS, "locations/entertainment").apply();
+                        CURRENT_TAG = Constants.TAG_ENTERTAINMENT;
+                        break;
+                    case R.id.nav_utilities:
+                        navItemIndex = 1;
+                        sharedPreferences.edit().putString(Constants.MAP_SEARCH_EXTRAS, "locations/utilities").apply();
+                        CURRENT_TAG = Constants.TAG_UTILITIES;
                         break;
                     case R.id.nav_how_to:
                         navItemIndex = 2;
                         CURRENT_TAG = Constants.TAG_HOW_TO;
-                        break;
-                    case R.id.nav_scheduler:
-                        startActivity(new Intent(MainActivity.this, ClassSchedulerContainer.class));
-                        drawer.closeDrawers();
                         break;
                     case R.id.nav_settings:
                         startActivity(new Intent(MainActivity.this, SettingsActivity.class));
@@ -171,17 +152,18 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_send:
                         //Launch email application that is chosen by the user.
-                        Intent intent = new Intent(Intent.ACTION_SEND);
-                        intent.setType("plain/text");
-                        intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"joseph.malachosky@stu.laroche.edu"});
-                        intent.putExtra(Intent.EXTRA_SUBJECT, "Welcome to LaRocheRideShare!");
-                        intent.putExtra(Intent.EXTRA_TEXT, "Body of message.");
-                        startActivity(intent);
+                        Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                        sendIntent.setType("plain/text");
+                        sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Welcome to LaRocheRideShare!");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Body of message.");
+                        startActivity(sendIntent);
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_logout:
                         //Find out a way to logout from another activity...
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class).putExtra("STARTED_BY_USER_NAV",true));
+                        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
+                        logoutIntent.putExtra("EXIT", false);
+                        startActivity(logoutIntent);
                         drawer.closeDrawers();
                         return true;
                     default:
@@ -194,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     item.setChecked(true);
                 }
                 item.setChecked(true);
-
                 loadHomeFragment();
                 return true;
             }
@@ -214,25 +195,24 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
             }
         };
-        drawer.setDrawerListener(toggle);
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
 
     private Fragment getHomeFragment() {
+        Fragment fragment = null;
         switch(navItemIndex) {
             case 0:
-                HomeDescription homeFragment = new HomeDescription();
-                return homeFragment;
+                fragment = new HomeDescription();
+                break;
             case 1:
-                Transportation schoolFragment = new Transportation();
-                return schoolFragment;
+                fragment = new MapsFragment();
+                break;
             case 2:
-                //Lunch Scheduler
-                HowToFragment howToFragment = new HowToFragment();
-                return howToFragment;
-            default:
-                return new HomeDescription();
+                fragment = new HowToFragment();
+                break;
         }
+        return fragment;
     }
 
     private void loadHomeFragment() {
@@ -249,15 +229,11 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
                         android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.content_main, fragment, CURRENT_TAG);
+                fragmentTransaction.replace(R.id.fragment_spot, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
         };
-
-        if(mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
-
+        mHandler.post(mPendingRunnable);
         drawer.closeDrawers();
         invalidateOptionsMenu();
     }

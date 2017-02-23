@@ -37,7 +37,9 @@
             android:name=".LoginActivity"
             android:label="@string/login_activity"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeOverlay.MyNoTitleActivity"/>
+            android:theme="@style/ThemeOverlay.MyNoTitleActivity">
+
+        </activity>
         <activity
             android:name=".ProfileActivity"
             android:label="Profile Activity"/>

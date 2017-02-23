@@ -7,7 +7,9 @@ package com.products.laroche.larocherideshare.model;
 public final class Constants {
     //Tags used for showing fragments
     public static final String TAG_HOME = "home";
-    public static final String TAG_TRANSPORTATION = "transportation";
+    public static final String TAG_RESTAURANTS = "restaurants";
+    public static final String TAG_UTILITIES = "utilities";
+    public static final String TAG_ENTERTAINMENT = "entertainment";
     public static final String TAG_HOW_TO = "how-to";
 
     public static final String HOST_URL = "http://10.0.2.2:8080/";
