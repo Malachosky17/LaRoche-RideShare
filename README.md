@@ -1,9 +1,4 @@
 # LaRocheRideShare
 Capstone 2016 Project
-mr6moon -> Making my changes...
 
-
-
-guys we need some ideas
-
-Please Work
+This is a graduation project from Capstone students of La Roche College 2016,2017.
