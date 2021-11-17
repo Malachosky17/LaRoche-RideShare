@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.maps;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -17,6 +17,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.products.laroche.larocherideshare.R;
+import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.model.MyPlace;
 

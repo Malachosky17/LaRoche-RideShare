@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui;
 
 import android.support.v4.app.FragmentManager;
 import android.os.Handler;
@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.products.laroche.larocherideshare.R;
+import com.products.laroche.larocherideshare.ui.user.DayFragment;
 
 public class ClassSchedulerContainer extends AppCompatActivity {
 

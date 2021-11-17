@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.settings;
 
 import android.content.res.Configuration;
 import android.os.Bundle;

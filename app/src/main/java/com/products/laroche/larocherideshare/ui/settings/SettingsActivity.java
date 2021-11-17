@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.settings;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.MenuItem;
+
+import com.products.laroche.larocherideshare.R;
 
 import java.util.List;
 

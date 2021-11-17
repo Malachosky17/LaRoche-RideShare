@@ -1,13 +1,9 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.user;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,21 +16,16 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
-import com.products.laroche.larocherideshare.model.MyPlace;
+import com.products.laroche.larocherideshare.ui.maps.MapsActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Locale;
+public class TransportationFragment extends Fragment implements View.OnClickListener {
 
-public class Transportation extends Fragment implements View.OnClickListener {
-
-    private static final String LOGTAG = Transportation.class.getSimpleName();
+    private static final String LOGTAG = TransportationFragment.class.getSimpleName();
     private int PLACE_PICKER_REQUEST = 1;
     //UI elements
     private Button btnFood;
@@ -43,7 +34,7 @@ public class Transportation extends Fragment implements View.OnClickListener {
     private Button btnUtilities;
 
 
-    public Transportation() {
+    public TransportationFragment() {
         // Required empty public constructor
     }
 

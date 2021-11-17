@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/thursday_fragment"
-    tools:context="com.products.laroche.larocherideshare.Transportation">
+    tools:context="com.products.laroche.larocherideshare.ui.user.TransportationFragment">
 
     <TextView
         android:id="@+id/day_title"

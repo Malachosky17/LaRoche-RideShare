@@ -1,8 +1,10 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.user;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import com.products.laroche.larocherideshare.R;
 
 public class ProfileActivity extends AppCompatActivity {
     @Override

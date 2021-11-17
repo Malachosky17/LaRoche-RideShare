@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.user;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,14 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.products.laroche.larocherideshare.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * Use the {@link HowToFragment#newInstance} factory method to
+ * {@link HomeDescriptionFragment.OnFragmentInteractionListener} interface
+ * to handle interaction events.
+ * Use the {@link HomeDescriptionFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HowToFragment extends Fragment {
+public class HomeDescriptionFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +29,9 @@ public class HowToFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HowToFragment() {
+    private OnFragmentInteractionListener mListener;
+
+    public HomeDescriptionFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +41,11 @@ public class HowToFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HowToFragment.
+     * @return A new instance of fragment HomeDescription.
      */
     // TODO: Rename and change types and number of parameters
-    public static HowToFragment newInstance(String param1, String param2) {
-        HowToFragment fragment = new HowToFragment();
+    public static HomeDescriptionFragment newInstance(String param1, String param2) {
+        HomeDescriptionFragment fragment = new HomeDescriptionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,21 +66,45 @@ public class HowToFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_to, container, false);
+        return inflater.inflate(R.layout.fragment_home_description, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
-
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+//        if (context instanceof Activity) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
     }
 }

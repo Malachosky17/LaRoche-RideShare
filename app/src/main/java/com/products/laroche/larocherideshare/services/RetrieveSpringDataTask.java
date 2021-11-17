@@ -1,11 +1,7 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.services;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.model.MyPlace;

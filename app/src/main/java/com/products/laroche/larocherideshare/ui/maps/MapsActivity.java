@@ -1,11 +1,10 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.maps;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
@@ -20,6 +19,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.products.laroche.larocherideshare.R;
+import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.model.MyPlace;
 

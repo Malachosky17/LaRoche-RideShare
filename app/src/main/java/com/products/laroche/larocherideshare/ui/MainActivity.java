@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -20,7 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.products.laroche.larocherideshare.ui.user.HomeDescriptionFragment;
+import com.products.laroche.larocherideshare.ui.user.HowToFragment;
+import com.products.laroche.larocherideshare.ui.user.ProfileActivity;
+import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
+import com.products.laroche.larocherideshare.ui.maps.MapsFragment;
+import com.products.laroche.larocherideshare.ui.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -203,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         switch(navItemIndex) {
             case 0:
-                fragment = new HomeDescription();
+                fragment = new HomeDescriptionFragment();
                 break;
             case 1:
                 fragment = new MapsFragment();

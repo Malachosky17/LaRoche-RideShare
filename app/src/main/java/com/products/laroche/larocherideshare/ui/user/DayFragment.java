@@ -1,4 +1,4 @@
-package com.products.laroche.larocherideshare;
+package com.products.laroche.larocherideshare.ui.user;
 
 import android.content.Context;
 import android.net.Uri;
@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
 
 /**

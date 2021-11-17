@@ -6,7 +6,7 @@
     android:background="@drawable/pittsburgh_bridge"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"

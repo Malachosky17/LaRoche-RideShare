@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    tools:context="com.products.laroche.larocherideshare.Transportation">
+    tools:context="com.products.laroche.larocherideshare.ui.user.TransportationFragment">
 
         <TextView
             android:layout_width="match_parent"
