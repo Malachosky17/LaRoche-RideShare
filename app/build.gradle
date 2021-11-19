@@ -1,4 +1,7 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
 
 android {
     compileSdkVersion 30
@@ -8,28 +11,36 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
-        release {
+        debug {
+            debuggable true
             minifyEnabled false
+        }
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    //Dependency for Google Sign-in
-    implementation 'com.android.support:appcompat-v7:24.2.1'
-    implementation 'com.android.support:design:24.2.1'
-    implementation 'com.android.support:support-v4:24.2.1'
-    implementation 'com.android.support:support-vector-drawable:24.2.1'
-    implementation 'com.google.android.gms:play-services-auth:9.8.0'
-    implementation 'com.google.android.gms:play-services-maps:9.8.0'
-    implementation 'com.google.android.gms:play-services-places:9.8.0'
-    implementation 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
-    testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.0-beta5'
+
+    // AndroidX
+    implementation "androidx.appcompat:appcompat:${versions.appCompat}"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+
+    // UI Libraries
+    implementation "com.google.android.material:material:${versions.materialDesign}"
+
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'com.google.android.gms:play-services-maps:18.0.0'
+    implementation 'com.google.android.gms:play-services-places:17.0.0'
+
+    // Testing
+    testImplementation 'junit:junit:4.13.2'
 }

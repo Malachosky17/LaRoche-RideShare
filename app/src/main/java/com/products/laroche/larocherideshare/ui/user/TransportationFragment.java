@@ -3,25 +3,19 @@ package com.products.laroche.larocherideshare.ui.user;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import androidx.fragment.app.Fragment;
+
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.ui.maps.MapsActivity;
-
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.client.RestTemplate;
 
 public class TransportationFragment extends Fragment implements View.OnClickListener {
 
@@ -50,10 +44,10 @@ public class TransportationFragment extends Fragment implements View.OnClickList
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_transportation, container, false);
-        btnFood = (Button)v.findViewById(R.id.btnFood);
-        btnEntertainment = (Button)v.findViewById(R.id.btnEntertainment);
-        btnSchool_Home = (Button)v.findViewById(R.id.btnSchool_Home);
-        btnUtilities = (Button)v.findViewById(R.id.btnUtilities);
+        btnFood = (Button) v.findViewById(R.id.btnFood);
+        btnEntertainment = (Button) v.findViewById(R.id.btnEntertainment);
+        btnSchool_Home = (Button) v.findViewById(R.id.btnSchool_Home);
+        btnUtilities = (Button) v.findViewById(R.id.btnUtilities);
         activateButtons();
         return v;
     }
@@ -62,7 +56,7 @@ public class TransportationFragment extends Fragment implements View.OnClickList
     public void onClick(View v) {
         Intent intent = new Intent(getContext(), MapsActivity.class);
         String urlExtension;
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.btnFood: {
                 urlExtension = "restaurants";
                 intent.putExtra(Constants.MAP_SEARCH_EXTRAS, urlExtension);
@@ -74,7 +68,7 @@ public class TransportationFragment extends Fragment implements View.OnClickList
                 break;
             }
             case R.id.btnSchool_Home: {
-                intent.putExtra(Constants.MAP_SEARCH_EXTRAS,"school_home");
+                intent.putExtra(Constants.MAP_SEARCH_EXTRAS, "school_home");
                 break;
             }
             case R.id.btnUtilities: {

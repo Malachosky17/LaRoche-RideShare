@@ -1,24 +1,12 @@
 package com.products.laroche.larocherideshare.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
-/**
- * Created by Malac on 2/7/2017.
- *
- * @author: Malac
- */
-
+// TODO Investigate why we implement Serializable
 public class MyPlace implements Serializable {
 
-    private String mName;
-    private double[] mLocation = new double[2];
-
-    public MyPlace() {
-
-    }
+    private final String mName;
+    private final double[] mLocation = new double[2];
 
     public MyPlace(String name, double latitude, double longitude) {
         this.mName = name;
@@ -32,15 +20,6 @@ public class MyPlace implements Serializable {
 
     public double[] getLocation() {
         return mLocation;
-    }
-
-    public void setName(String name) {
-        this.mName = name;
-    }
-
-    public void setLocation(double latitude, double longitude) {
-        this.mLocation[0] = latitude;
-        this.mLocation[1] = longitude;
     }
 
 }

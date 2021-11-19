@@ -3,8 +3,6 @@ package com.products.laroche.larocherideshare.ui.user;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
@@ -160,7 +161,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
         Bundle bundle = new Bundle();
         DayFragment dayFragment = new DayFragment();
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        if(validateTimes()) {
+        if (validateTimes()) {
             switch (v.getId()) {
                 case R.id.btn_monday_next: {
                     bundle.putString(getString(R.string.class_scheduler_signal), Constants.WEEKDAYS[1]);
@@ -239,11 +240,11 @@ public class DayFragment extends Fragment implements View.OnClickListener {
     }
 
     private boolean validateTimes() {
-        if(noClassCheckBox.isChecked()) {
+        if (noClassCheckBox.isChecked()) {
             return true;
         }
-        if(oneWayTrans.isChecked()) {
-            if(!pickUpTime.getSelectedItem().toString().contentEquals("N/A") ||
+        if (oneWayTrans.isChecked()) {
+            if (!pickUpTime.getSelectedItem().toString().contentEquals("N/A") ||
                     !dropOffTime.getSelectedItem().toString().contentEquals("N/A")) {
                 return true;
             } else {
@@ -252,7 +253,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         }
-        if(!pickUpTime.getSelectedItem().toString().contentEquals("N/A") &&
+        if (!pickUpTime.getSelectedItem().toString().contentEquals("N/A") &&
                 !dropOffTime.getSelectedItem().toString().contentEquals("N/A")) {
             return true;
         } else {

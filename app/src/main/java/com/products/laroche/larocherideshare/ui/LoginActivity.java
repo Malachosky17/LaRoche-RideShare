@@ -3,19 +3,20 @@ package com.products.laroche.larocherideshare.ui;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.products.laroche.larocherideshare.R;
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     // UI references.
     private GoogleApiClient mGoogleApiClient;
+    // TODO Replace GoogleApiClient with individual Google Clients
+    private GoogleSignInClient mSignInClient;
     private ProgressDialog mProgressDialog;
 
     private SignInButton signInButton = null;
@@ -51,7 +54,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             finish();
             return;
         }
-        if(sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+        if (sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
             startActivity(new Intent(this, MainActivity.class));
         }
 
@@ -91,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             sharedPreferences.edit().putString(Constants.PREFERENCES_USER_EMAIL, acct.getEmail()).apply();
             Log.i(TAG, "Email login: " + acct.getEmail());
 
-            if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+            if (!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
                 sharedPreferences.edit().putBoolean(Constants.PREFERENCES_LOGIN_STATUS, true).apply();
                 startActivity(new Intent(this, MainActivity.class));
             }
@@ -104,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onBackPressed() {
-        if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+        if (!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
             //Make user kill application without returning to the MainActivity
             moveTaskToBack(true);
         } else {
@@ -132,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
                 break;

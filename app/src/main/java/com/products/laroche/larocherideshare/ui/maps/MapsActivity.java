@@ -1,5 +1,22 @@
 package com.products.laroche.larocherideshare.ui.maps;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.products.laroche.larocherideshare.R;
+import com.products.laroche.larocherideshare.model.Constants;
+import com.products.laroche.larocherideshare.model.MyPlace;
+import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,22 +24,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
-
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
-import android.util.Log;
-
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.MapStyleOptions;
-import com.products.laroche.larocherideshare.R;
-import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
-import com.products.laroche.larocherideshare.model.Constants;
-import com.products.laroche.larocherideshare.model.MyPlace;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -37,7 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Log.i(LOGTAG, "onCreate");
         Bundle extras = getIntent().getExtras();
-        if(extras == null) {
+        if (extras == null) {
             mapSearchInfo = null;
         } else {
             mapSearchInfo = (String) extras.getString(Constants.MAP_SEARCH_EXTRAS);
@@ -62,11 +63,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i(LOGTAG, "onMapReady");
         mMap = googleMap;
         //Set daytime or nighttime maps determined by time of day.
-        if(getCurrentTime() > 19) {
-            MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.google_maps_nighttime);
+        if (getCurrentTime() > 19) {
+            MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(
+                    this,
+                    R.raw.google_maps_nighttime);
             mMap.setMapStyle(styleOptions);
         } else {
-            MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.google_maps_daytime);
+            MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(
+                    this,
+                    R.raw.google_maps_daytime);
             mMap.setMapStyle(styleOptions);
         }
         // Add a marker near La Roche College and move the camera
@@ -76,7 +81,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College Area"));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laRocheCollege, 15));
             addMarkersToMap(mapSearchInfo);
-        } catch(SecurityException sEx) {
+        } catch (SecurityException sEx) {
             Log.e(LOGTAG, sEx.getMessage() + ": " + sEx.getCause());
         }
     }
@@ -88,7 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         date.setTimeZone(TimeZone.getTimeZone("America/New_York"));
 
         String localTime = date.format(currentLocalTime);
-        int hour = Integer.parseInt(localTime.substring(0,2));
+        int hour = Integer.parseInt(localTime.substring(0, 2));
         return hour;
     }
 
@@ -100,14 +105,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         RetrieveSpringDataTask task = new RetrieveSpringDataTask();
         try {
             ArrayList<MyPlace> places = task.execute(urlTag).get();
-            if(!places.isEmpty()) {
-                for(MyPlace place : places) {
+            if (!places.isEmpty()) {
+                for (MyPlace place : places) {
                     LatLng location = new LatLng(place.getLocation()[0], place.getLocation()[1]);
                     mMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
                     Log.i(LOGTAG, place.getName());
                 }
             }
-        } catch(InterruptedException | ExecutionException ie) {
+        } catch (InterruptedException | ExecutionException ie) {
             Log.e(LOGTAG, ie.getMessage() + ": " + ie.getCause());
         }
     }

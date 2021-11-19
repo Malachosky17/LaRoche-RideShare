@@ -1,14 +1,14 @@
 package com.products.laroche.larocherideshare.ui;
 
-import android.support.v4.app.FragmentManager;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.ui.user.DayFragment;
@@ -29,12 +29,12 @@ public class ClassSchedulerContainer extends AppCompatActivity {
     public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
 
-        if(isMonday()) {
-            for(int i = 0; i <= count; i++) {
+        if (isMonday()) {
+            for (int i = 0; i <= count; i++) {
                 getSupportFragmentManager().popBackStack();
             }
         }
-        if(count == 0) {
+        if (count == 0) {
             super.onBackPressed();
         } else {
             getSupportFragmentManager().popBackStack();
@@ -44,7 +44,7 @@ public class ClassSchedulerContainer extends AppCompatActivity {
     private Fragment getHomeFragment(String day) {
         Bundle bundle = new Bundle();
         bundle.putString("from classschedulercontainer", day);
-        switch(day) {
+        switch (day) {
             case "Monday":
                 //Monday Schedule
                 DayFragment mondayFragment = new DayFragment();
@@ -54,32 +54,32 @@ public class ClassSchedulerContainer extends AppCompatActivity {
                 DayFragment tuesdayFragment = new DayFragment();
                 tuesdayFragment.setArguments(bundle);
                 return tuesdayFragment;
-                //Tuesday Schedule
+            //Tuesday Schedule
             case "Wednesday":
                 DayFragment wednesdayFragment = new DayFragment();
                 wednesdayFragment.setArguments(bundle);
                 return wednesdayFragment;
-                //Wednesday Schedule
+            //Wednesday Schedule
             case "Thursday":
                 DayFragment thursdayFragment = new DayFragment();
                 thursdayFragment.setArguments(bundle);
                 return thursdayFragment;
-                //Thursday Schedule
+            //Thursday Schedule
             case "Friday":
                 DayFragment fridayFragment = new DayFragment();
                 fridayFragment.setArguments(bundle);
                 return fridayFragment;
-                //Friday Schedule
+            //Friday Schedule
             default:
                 return null;
         }
     }
 
     public void handleButtonPress(View view) {
-        button = (Button)findViewById(view.getId());
-        final Fragment fragment = getHomeFragment((String)button.getText());
+        button = (Button) findViewById(view.getId());
+        final Fragment fragment = getHomeFragment((String) button.getText());
 
-        if(fragment != null) {
+        if (fragment != null) {
             Runnable pendingRunnable = new Runnable() {
                 @Override
                 public void run() {
@@ -88,7 +88,7 @@ public class ClassSchedulerContainer extends AppCompatActivity {
                     fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
                             android.R.anim.fade_out);
                     fragmentTransaction.replace(R.id.activity_class_scheduler_container, fragment, null);
-                    fragmentTransaction.addToBackStack((String)button.getText());
+                    fragmentTransaction.addToBackStack((String) button.getText());
                     fragmentTransaction.commitAllowingStateLoss();
                 }
             };
@@ -98,9 +98,9 @@ public class ClassSchedulerContainer extends AppCompatActivity {
 
     private boolean isMonday() {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.activity_class_scheduler_container);
-        if(fragment != null) {
+        if (fragment != null) {
             int fragmentID = fragment.getId();
-            if(fragmentID == R.id.monday_fragment) {
+            if (fragmentID == R.id.monday_fragment) {
                 Toast.makeText(getApplicationContext(), "Monday was found!", Toast.LENGTH_LONG).show();
                 return true;
             }

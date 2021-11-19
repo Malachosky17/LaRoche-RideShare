@@ -3,11 +3,12 @@ package com.products.laroche.larocherideshare.ui.maps;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,9 +19,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.products.laroche.larocherideshare.R;
-import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.model.MyPlace;
+import com.products.laroche.larocherideshare.services.RetrieveSpringDataTask;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -60,7 +61,7 @@ public class MapsFragment extends Fragment {
         date.setTimeZone(TimeZone.getTimeZone("America/New_York"));
 
         String localTime = date.format(currentLocalTime);
-        int hour = Integer.parseInt(localTime.substring(0,2));
+        int hour = Integer.parseInt(localTime.substring(0, 2));
         return hour;
     }
 
@@ -73,14 +74,14 @@ public class MapsFragment extends Fragment {
         try {
             Log.i(LOGTAG, "Adding Markers to map " + mapSearchInfo);
             ArrayList<MyPlace> places = task.execute(mapSearchInfo).get();
-            if(!places.isEmpty()) {
-                for(MyPlace place : places) {
+            if (!places.isEmpty()) {
+                for (MyPlace place : places) {
                     LatLng location = new LatLng(place.getLocation()[0], place.getLocation()[1]);
                     googleMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
                     Log.i(LOGTAG, place.getName());
                 }
             }
-        } catch(InterruptedException | ExecutionException ie) {
+        } catch (InterruptedException | ExecutionException ie) {
             Log.e(LOGTAG, ie.getMessage() + ": " + ie.getCause());
         }
     }
@@ -93,7 +94,7 @@ public class MapsFragment extends Fragment {
         mMapView.onResume();    //Needed to get the map to display immediately
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         mMapView.getMapAsync(new OnMapReadyCallback() {
@@ -102,7 +103,7 @@ public class MapsFragment extends Fragment {
                 Log.i(LOGTAG, "onMapReady");
                 googleMap = pMap;
                 //Set daytime or nighttime maps determined by time of day.
-                if(getCurrentTime() > 19) {
+                if (getCurrentTime() > 19) {
                     MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.google_maps_nighttime);
                     googleMap.setMapStyle(styleOptions);
                 } else {
@@ -116,7 +117,7 @@ public class MapsFragment extends Fragment {
                     googleMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laRocheCollege, 13));
                     addMarkersToMap();
-                } catch(SecurityException sEx) {
+                } catch (SecurityException sEx) {
                     Log.e(LOGTAG, sEx.getMessage() + ": " + sEx.getCause());
                 }
             }

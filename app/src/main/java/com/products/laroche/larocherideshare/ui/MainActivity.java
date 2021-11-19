@@ -1,32 +1,34 @@
 package com.products.laroche.larocherideshare.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.products.laroche.larocherideshare.ui.user.HomeDescriptionFragment;
-import com.products.laroche.larocherideshare.ui.user.HowToFragment;
-import com.products.laroche.larocherideshare.ui.user.ProfileActivity;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.google.android.material.navigation.NavigationView;
 import com.products.laroche.larocherideshare.R;
 import com.products.laroche.larocherideshare.model.Constants;
 import com.products.laroche.larocherideshare.ui.maps.MapsFragment;
 import com.products.laroche.larocherideshare.ui.settings.SettingsActivity;
+import com.products.laroche.larocherideshare.ui.user.HomeDescriptionFragment;
+import com.products.laroche.larocherideshare.ui.user.HowToFragment;
+import com.products.laroche.larocherideshare.ui.user.ProfileActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
 
 //        if(!sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
 //            if(getIntent().getBooleanExtra("NOT_LOGGED_IN", false)) {
@@ -67,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializeNavigationView();
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             navItemIndex = 0;
             CURRENT_TAG = Constants.TAG_HOME;
             loadHomeFragment();
@@ -107,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 loadHomeFragment();
                 return;
             }
-            if(sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
+            if (sharedPreferences.getBoolean(Constants.PREFERENCES_LOGIN_STATUS, false)) {
                 Intent intent = new Intent(this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 0;
                 }
 
-                if(item.isChecked()) {
+                if (item.isChecked()) {
                     item.setChecked(false);
                 } else {
                     item.setChecked(true);
@@ -207,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Fragment getHomeFragment() {
         Fragment fragment = null;
-        switch(navItemIndex) {
+        switch (navItemIndex) {
             case 0:
                 fragment = new HomeDescriptionFragment();
                 break;
@@ -222,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadHomeFragment() {
-        if(getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
+        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
             return;
         }
@@ -245,22 +247,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkPermissions() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_FINE_LOCATION_REQUEST);
         }
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_NETWORK_STATE}, MY_NETWORK_STATUS_REQUEST);
         }
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.INTERNET) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.INTERNET}, MY_INTERNET_REQUEST);
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case MY_FINE_LOCATION_REQUEST: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permission Granted
                 } else {
                     //Permission Denied
@@ -268,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             case MY_NETWORK_STATUS_REQUEST: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permission Granted
                 } else {
                     //Permission Denied
@@ -276,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             case MY_INTERNET_REQUEST: {
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permission Granted
                 } else {
                     //Permission Denied
@@ -286,7 +289,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void handleProfileButton(View view){
+    public void handleProfileButton(View view) {
         Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
