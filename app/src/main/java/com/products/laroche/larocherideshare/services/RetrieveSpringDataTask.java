@@ -8,12 +8,6 @@ import com.products.laroche.larocherideshare.model.MyPlace;
 import java.util.ArrayList;
 import java.util.Locale;
 
-/**
- * Created by Malac on 2/7/2017.
- *
- * @author: Malac
- */
-
 /*
  * Grabs sample Data:
  * [
@@ -28,6 +22,7 @@ import java.util.Locale;
  *  {"name":"Passavant Hospital","location":[51.06,90]}
  * ]
  */
+// TODO Replace with java.util.concurrent
 public class RetrieveSpringDataTask extends AsyncTask<String, Void, ArrayList<MyPlace>> {
 
     private static final String LOGTAG = RetrieveSpringDataTask.class.getSimpleName();

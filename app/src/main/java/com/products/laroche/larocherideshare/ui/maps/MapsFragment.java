@@ -54,36 +54,28 @@ public class MapsFragment extends Fragment {
         Log.i(LOGTAG, "   " + mapSearchInfo);
     }
 
-    private int getCurrentTime() {
-        Calendar calendar = Calendar.getInstance();
-        Date currentLocalTime = calendar.getTime();
-        DateFormat date = new SimpleDateFormat("HH:mm");
-        date.setTimeZone(TimeZone.getTimeZone("America/New_York"));
-
-        String localTime = date.format(currentLocalTime);
-        int hour = Integer.parseInt(localTime.substring(0, 2));
-        return hour;
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
     }
 
-    /*
-     * Add "food" places to mMap
-     * Examples: Local Restaurants, Ice cream, Pizza, etc.
-     */
-    private void addMarkersToMap() {
-        RetrieveSpringDataTask task = new RetrieveSpringDataTask();
-        try {
-            Log.i(LOGTAG, "Adding Markers to map " + mapSearchInfo);
-            ArrayList<MyPlace> places = task.execute(mapSearchInfo).get();
-            if (!places.isEmpty()) {
-                for (MyPlace place : places) {
-                    LatLng location = new LatLng(place.getLocation()[0], place.getLocation()[1]);
-                    googleMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
-                    Log.i(LOGTAG, place.getName());
-                }
-            }
-        } catch (InterruptedException | ExecutionException ie) {
-            Log.e(LOGTAG, ie.getMessage() + ": " + ie.getCause());
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mMapView.onLowMemory();
     }
 
     @Override
@@ -125,27 +117,35 @@ public class MapsFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
+    private int getCurrentTime() {
+        Calendar calendar = Calendar.getInstance();
+        Date currentLocalTime = calendar.getTime();
+        DateFormat date = new SimpleDateFormat("HH:mm");
+        date.setTimeZone(TimeZone.getTimeZone("America/New_York"));
+
+        String localTime = date.format(currentLocalTime);
+        int hour = Integer.parseInt(localTime.substring(0, 2));
+        return hour;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mMapView.onDestroy();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        mMapView.onLowMemory();
+    /*
+     * Add "food" places to mMap
+     * Examples: Local Restaurants, Ice cream, Pizza, etc.
+     */
+    private void addMarkersToMap() {
+        RetrieveSpringDataTask task = new RetrieveSpringDataTask();
+        try {
+            Log.i(LOGTAG, "Adding Markers to map " + mapSearchInfo);
+            ArrayList<MyPlace> places = task.execute(mapSearchInfo).get();
+            if (!places.isEmpty()) {
+                for (MyPlace place : places) {
+                    LatLng location = new LatLng(place.getLocation()[0], place.getLocation()[1]);
+                    googleMap.addMarker(new MarkerOptions().position(location).title(place.getName()));
+                    Log.i(LOGTAG, place.getName());
+                }
+            }
+        } catch (InterruptedException | ExecutionException ie) {
+            Log.e(LOGTAG, ie.getMessage() + ": " + ie.getCause());
+        }
     }
 }
