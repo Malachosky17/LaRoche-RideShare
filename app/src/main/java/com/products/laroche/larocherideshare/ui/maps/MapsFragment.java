@@ -14,7 +14,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -31,15 +30,9 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.concurrent.ExecutionException;
 
-/**
- * Created by Malac on 2/22/2017.
- *
- * @author: Malac
- */
-
 public class MapsFragment extends Fragment {
 
-    MapView mMapView;
+    private MapView mMapView;
     private GoogleMap googleMap;
 
     private static String LOGTAG = MapsFragment.class.getSimpleName();
@@ -49,7 +42,8 @@ public class MapsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(LOGTAG, "onCreate");
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getActivity()
+                .getSharedPreferences(Constants.SHARED_PREFERENCES, Context.MODE_PRIVATE);
         mapSearchInfo = sharedPreferences.getString(Constants.MAP_SEARCH_EXTRAS, "everything");
         Log.i(LOGTAG, "   " + mapSearchInfo);
     }
@@ -89,29 +83,30 @@ public class MapsFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mMapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(GoogleMap pMap) {
-                Log.i(LOGTAG, "onMapReady");
-                googleMap = pMap;
-                //Set daytime or nighttime maps determined by time of day.
-                if (getCurrentTime() > 19) {
-                    MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.google_maps_nighttime);
-                    googleMap.setMapStyle(styleOptions);
-                } else {
-                    MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.google_maps_daytime);
-                    googleMap.setMapStyle(styleOptions);
-                }
-                // Add a marker near La Roche College and move the camera
-                try {
-                    googleMap.setMyLocationEnabled(true);
-                    LatLng laRocheCollege = new LatLng(40.5683, -80.0141);
-                    googleMap.addMarker(new MarkerOptions().position(laRocheCollege).title("La Roche College"));
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laRocheCollege, 13));
-                    addMarkersToMap();
-                } catch (SecurityException sEx) {
-                    Log.e(LOGTAG, sEx.getMessage() + ": " + sEx.getCause());
-                }
+        mMapView.getMapAsync(pMap -> {
+            Log.i(LOGTAG, "onMapReady");
+            googleMap = pMap;
+            //Set daytime or nighttime maps determined by time of day.
+            if (getCurrentTime() > 19) {
+                MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(getActivity(),
+                        R.raw.google_maps_nighttime);
+                googleMap.setMapStyle(styleOptions);
+            } else {
+                MapStyleOptions styleOptions = MapStyleOptions.loadRawResourceStyle(getActivity(),
+                        R.raw.google_maps_daytime);
+                googleMap.setMapStyle(styleOptions);
+            }
+            // Add a marker near La Roche College and move the camera
+            try {
+                googleMap.setMyLocationEnabled(true);
+                LatLng laRocheCollege = new LatLng(40.5683, -80.0141);
+                googleMap.addMarker(new MarkerOptions()
+                        .position(laRocheCollege)
+                        .title("La Roche College"));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(laRocheCollege, 13));
+                addMarkersToMap();
+            } catch (SecurityException sEx) {
+                Log.e(LOGTAG, sEx.getMessage() + ": " + sEx.getCause());
             }
         });
         return rootView;

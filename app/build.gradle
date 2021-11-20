@@ -32,6 +32,7 @@ dependencies {
     implementation 'androidx.vectordrawable:vectordrawable:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
+    implementation 'androidx.preference:preference:1.1.1'
 
     // UI Libraries
     implementation "com.google.android.material:material:${versions.materialDesign}"

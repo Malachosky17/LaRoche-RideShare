@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/activity_class_scheduler_container.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/activity_maps.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/activity_profile.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/app_bar_main.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/content_main.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_friday.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_home_description.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_how_to.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_monday.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_school_home.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_thursday.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_transportation.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_tuesday.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/fragment_wednesday.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/location_fragment.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/jmala/AndroidStudioProjects/LaRoche-RideShare/app/src/main/res/layout/nav_header_main.xml" value="0.1933876811594203" />
+      </map>
+    </option>
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="android.support.annotation.Nullable" />
     <option name="myDefaultNotNull" value="android.support.annotation.NonNull" />

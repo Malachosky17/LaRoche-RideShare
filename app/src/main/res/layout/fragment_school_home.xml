@@ -99,7 +99,7 @@
         </TableRow>
     </TableLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:src="@android:drawable/ic_dialog_email"
         app:fabSize="normal"
         android:layout_width="wrap_content"

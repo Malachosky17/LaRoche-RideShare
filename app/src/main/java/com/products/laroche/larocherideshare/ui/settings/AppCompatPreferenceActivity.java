@@ -15,6 +15,9 @@ import androidx.appcompat.app.AppCompatDelegate;
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls
  * to be used with AppCompat.
+ * <p>
+ * TODO Replace with androidx.preference Preference.java
+ * https://developer.android.com/guide/topics/ui/settings
  */
 public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
